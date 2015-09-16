@@ -8,7 +8,7 @@ Getting Started
 
 - $venv/bin/python setup.py develop
 
-- $venv/bin/initialize_caas_db development.ini
+- $venv/bin/initialize_db development.ini
 
 - $venv/bin/pserve development.ini
 
@@ -18,26 +18,24 @@ TODO:
 
 - style must be like on the old site
 
-- articles page
-
-- main page: last articles, map
-
-- add csrf to views
-
-- put all existing articles to database with converthtml.py
-
-- add a link "Create New Article" to the main page for authenticated users
-
-- Decrease font size everywhere
+- main page: last articles, news
 
 - Pictures in text: we use photoset-grid, but we havw to fix for not to crop portrait oriented pictures surronded by landscape oriented ones
 
-- Text edition tool for new article. See issue https://bitbucket.org/annndrey/caas/issue/7
+- Text edition tool for new article
 
-- Social networks integration so users can login using their social accounts and make a repost
+- Social networks integration so users can login using their social accounts or make a repost
 
 - Pictures upload: http://blueimp.github.io/jQuery-File-Upload/angularjs.html
 
-- New article creation for authorized users
+- something wrong when adding a new article, it ignores status and sets always to draft
 
+- add category (series) creation on the go
 
+- add a section with contacts
+
+- add a gallery
+
+- add socialbuttons
+
+- add contacts above the navbar 

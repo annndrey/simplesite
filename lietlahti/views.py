@@ -181,12 +181,6 @@ def upload_files(request):
 @view_config(route_name='newpost')
 def add_new_post(request):
 	succ = False
-	#if not authenticated_userid(request):
-	#	request.session.flash({
-	#			'class' : 'warning',
-	#			'text'  : 'Войдите чтобы увидеть эту страницу'
-	#			})
-	#	return HTTPSeeOther(location=request.route_url('login'))
 	cfg = request.registry.settings
 	recaptcha_secret = cfg.get('recaptcha.secret', False)
 	if not request.POST:
@@ -231,6 +225,7 @@ def discuss_view(request):
 				'text'  : 'Войдите чтобы увидеть эту страницу'
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
+
 	else:
 		max_page = DBSession.query(func.count(Post.id))[-1][-1]//on_page
 		if page and int(page) > 0:

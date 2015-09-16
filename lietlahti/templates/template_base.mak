@@ -63,13 +63,14 @@
     <nav class="navbar navbar-default" role="navigation">
       <a class="navbar-brand">${pagename}</a>
       <div class="container-fluid">
+
 	<p class="navbar-text navbar-right">
   	  % if auth:
 	    Здравствуйте, ${authuser}! 
 	    <a data-toggle="tooltip" data-placement="top" title="Выйти" href="${request.route_url('logout')}"><span class="glyphicon glyphicon-log-out"></span></a>
 	  % else:
 	    % if request.current_route_url() != request.route_url('login'):
-	      Вход <a href="${request.route_url('login')}"><span class="glyphicon glyphicon-log-in"></a>
+	      <a href="${request.route_url('login')}">Вход <span class="glyphicon glyphicon-log-in"></a>
 	    % endif  
 	  % endif
 	  <ul class="nav navbar-nav">
@@ -77,6 +78,15 @@
 	    % if request.current_route_url() != request.route_url('main'):
 	      <li><a href="${request.route_url('main')}">Главная</a></li>
 	    % endif
+            % if articles:
+            % for a in articles:
+             % if a.series == 'mainpage':
+            
+              <li><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></li>
+             % endif
+            % endfor
+            % endif  
+
 	    % if auth:
 	      % if not 'discuss' in request.current_route_url():
 		<li><a href="${request.route_url('home')}" title="Чатик"><span class="glyphicon glyphicon-comment"></span></a></li>
