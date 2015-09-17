@@ -28,8 +28,6 @@ TODO:
 
 - Pictures upload: http://blueimp.github.io/jQuery-File-Upload/angularjs.html
 
-- add a gallery
-
 - add socialbuttons
 
 - add contacts above the navbar 
