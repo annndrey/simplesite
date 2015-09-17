@@ -83,16 +83,17 @@
 	  <div class="form-group">
 	    <label for="inputSeries" class="col-md-2 control-label">Серия статей</label>
 	    <div class="col-md-10">
-	      
 	      <select class="form-control" id="inputSeries" name="inputSeries">
 		% if article_series is not None:
 		  % for s in article_series:
 		    % if edit:
 		      % if s == article.series:
 			<option selected value="${s}">${s}</option>
-		      % else:
-			<option value="${s}">${s}</option>
-		      % endif
+                      % else:
+                        <option value="${s}">${s}</option>
+                      % endif  
+		    % else:
+		      <option value="${s}">${s}</option>
 		    % endif   
 		  % endfor
 		% endif

@@ -72,7 +72,7 @@ class Article(Base):
 		default='draft',
 		)
 
-	def __init__(self, mainname, upname, keywords, url, maintext, descr, pubtimestamp, user, sep_url, right_bracket_url, left_bracket_url, previewtext, previewpict):
+	def __init__(self, mainname, upname, keywords, url, maintext, descr, pubtimestamp, user, sep_url, right_bracket_url, left_bracket_url, previewtext, previewpict, series, status):
 		self.mainname = mainname
 		self.upname = upname
 		self.keywords = keywords
@@ -85,7 +85,8 @@ class Article(Base):
 		self.right_bracket_url = right_bracket_url
 		self.previewtext = previewtext
 		self.previewpict = previewpict
-		
+		self.series = series
+		self.status = status
 
 #TODO md5 hash in password fields instead of plain text
 class User(Base):

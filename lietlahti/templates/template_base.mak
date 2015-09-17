@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="keywords" content="lietlahti discuss page" />
     <meta name="description" content="lietlahti" />
-    <title>¡LIETLAHTI!</title>
+    <title>Лиетлахти, природно-этнографический парк</title>
     
     <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/main.css')}" type="text/css" />
     <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/bootstrap.css')}" type="text/css" />
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/select2-bootstrap.css')}" type="text/css" />
     <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/bootstrap-glyphicons.css')}" type="text/css" />
     <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/font-awesome.css')}" type="text/css" />
-    ##<link rel="stylesheet" href="${req.static_url('lietlahti:static/css/leaflet.css')}" type="text/css" />
-    
+    <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/leaflet.css')}" type="text/css" />
+    <link rel="icon" type="image/png" href="${req.static_url('lietlahti:static/favicon.png')}" />
     <script type="text/javascript" src="${req.static_url('lietlahti:static/js/jquery.js')}"></script>
     <script type="text/javascript" src="${req.static_url('lietlahti:static/js/jquery.actual.js')}"></script>
     <script type="text/javascript" src="${req.static_url('lietlahti:static/js/bootstrap.js')}"></script>
@@ -61,7 +61,7 @@
   <div class="container">
     
     <nav class="navbar navbar-default" role="navigation">
-      <a class="navbar-brand">${pagename}</a>
+      <a class="navbar-brand"><p><img alt="Brand" width=20px src="${req.static_url('lietlahti:static/favicon.png')}"> ${pagename | n}</p></a>
       <div class="container-fluid">
 
 	<p class="navbar-text navbar-right">
@@ -78,11 +78,17 @@
 	    % if request.current_route_url() != request.route_url('main'):
 	      <li><a href="${request.route_url('main')}">Главная</a></li>
 	    % endif
+
             % if articles:
             % for a in articles:
              % if a.series == 'mainpage':
-            
-              <li><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></li>
+               % if article:
+                 % if article.id != a.id:
+                   <li><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></li>
+                 % endif 
+               % else:
+                <li><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></li>
+               % endif
              % endif
             % endfor
             % endif  

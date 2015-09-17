@@ -28,12 +28,6 @@ TODO:
 
 - Pictures upload: http://blueimp.github.io/jQuery-File-Upload/angularjs.html
 
-- something wrong when adding a new article, it ignores status and sets always to draft
-
-- add category (series) creation on the go
-
-- add a section with contacts
-
 - add a gallery
 
 - add socialbuttons

@@ -79,7 +79,7 @@ def timer_callback():
 	t = Timer(secs, post_stuff)
 	t.start()
 
-post_stuff()
+#post_stuff()
 
 @view_config(route_name='main', renderer='template_main.mak')
 def main_view(request):
@@ -96,10 +96,11 @@ def main_view(request):
 def article_view(request):
 	cfg = request.registry.settings
 	recaptcha_key = cfg.get('recaptcha.public', False)
+	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 	article_url = request.matchdict.get('url', None)
 	article = DBSession.query(Article).filter(Article.url==article_url).first()
 	comments = DBSession.query(Post).filter(Post.page==article_url)
-	tpldef = {'article':article, 'pagename':article.mainname, 'comments':comments, 'captchakey':recaptcha_key}
+	tpldef = {'article':article, 'pagename':article.mainname, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header}
 	if authenticated_userid(request):
 		tpldef.update({'auth':True, 'authuser':authenticated_userid(request)})
 	return tpldef
@@ -115,8 +116,9 @@ def add_article(request):
 		return HTTPSeeOther(location=request.route_url('login'))
 	if not request.POST:
 		tpldef = {}
+		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 		article_series = set([s.series for s in DBSession.query(Article).all()])
-		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'Новая статья'})
+		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header})
 		return tpldef
 	else:
 		csrf = request.POST.get('csrf', '')
@@ -127,14 +129,30 @@ def add_article(request):
 			art_descr = request.POST.get('inputDescr', None)
 			art_text = request.POST.get('inputArticle', None)
 			art_url = request.POST.get('inputURL', None)
-
+			art_status = request.POST.get('inputStatus', None)
+			art_series = request.POST.get('inputSeries', None)
 			art_leftbr = request.POST.get('inputLeftBracket', None)
 			art_rightbr = request.POST.get('inputRightBracket', None)
 			art_sep = request.POST.get('inputSep', None)
 			art_prevtext = request.POST.get('inputPrevText', None)
 			art_prevpict = request.POST.get('inputPrevPict', None)
 
-			newarticle = Article(art_name, art_uppername, art_kwords, art_url, art_text, art_descr, datetime.datetime.now(), authenticated_userid(request), art_sep, art_rightbr, art_leftbr, art_prevtext, art_prevpict)
+			newarticle = Article(
+				art_name, 
+				art_uppername, 
+				art_kwords, 
+				art_url, 
+				art_text, 
+				art_descr, 
+				datetime.datetime.now(), 
+				authenticated_userid(request), 
+				art_sep, 
+				art_rightbr, 
+				art_leftbr, 
+				art_prevtext, 
+				art_prevpict, 
+				art_series, 
+				art_status)
 			DBSession.add(newarticle)
 			# new article added here
 		return HTTPSeeOther(location=request.route_url('main'))
@@ -227,6 +245,7 @@ def discuss_view(request):
 		return HTTPSeeOther(location=request.route_url('login'))
 
 	else:
+		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 		max_page = DBSession.query(func.count(Post.id))[-1][-1]//on_page
 		if page and int(page) > 0:
 			page = int(page) - 1
@@ -245,10 +264,11 @@ def discuss_view(request):
 
 		tpldef = {'posts': posts,
 				  'page': page,
+				  'articles': header,
 				  'max_page':max_page,
 				  'authuser':authenticated_userid(request),
 				  'auth':True,
-				  'pagename':'Глагне {0}'.format(' '),#.join([x.name for x in users])),
+				  'pagename':"""<span class="glyphicon glyphicon-comment"></span>""",#.join([x.name for x in users])),
 				  'newcomments':newcomments
 				  }
 		return tpldef
@@ -274,8 +294,10 @@ def login_view(request):
 					request.response.headerlist.extend(headers)
 					return HTTPFound(request.route_url('home'), headers=headers)
 		did_fail = True
+	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 	tpldef = {
 		'login'       : login,
+		'articles'    : header,
 		'failed'      : did_fail,
 		'pagename'    : 'Вход'
 		}
@@ -350,11 +372,13 @@ def pub_edit(request):
 					return HTTPSeeOther(location=request.referrer)
 		else:
 			if pubtype == 'article':
+				header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 				article = DBSession.query(Article).filter(Article.id==pubid).first()
 				article_series = set([s.series for s in DBSession.query(Article).all()])
 				articleparams = {
 					'edit':True,
 					'article': article,
+					'articles': header,
 					'article_status':article_status,
 					'article_series':article_series,
 					'authuser':authenticated_userid(request), 
