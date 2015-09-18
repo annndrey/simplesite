@@ -81,14 +81,28 @@ def timer_callback():
 
 #post_stuff()
 
+class Contacts():
+	def __init__(self, conf):
+		self.config = json.loads(conf)
+		
+	def get(self, cont_name):
+		try:
+			contact = self.config.get(cont_name, None)
+			if contact is not None:
+				return contact
+		except:
+			pass
+
 @view_config(route_name='main', renderer='template_main.mak')
 def main_view(request):
+	cfg = request.registry.settings
+	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	articles = DBSession.query(Article).order_by(Article.pubtimestamp.desc())
-	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':'Главная' }
+	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':'Главная', 'contacts': contacts }
 	if authenticated_userid(request):
 		tpldef.update({
 				'auth':True,
-				'authuser':authenticated_userid(request)
+				'authuser':authenticated_userid(request),
 				})
 	return tpldef
 

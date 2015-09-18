@@ -59,11 +59,14 @@
     ## set navbar here
 <div id="wrap">
   <div class="container">
-    
+   !!! align buttons
+   <a class="btn btn-default btn-sm" role="button"><img width=20px src="${req.static_url('lietlahti:static/icons/phone.png')}"></span>${contacts.get('phone')}</a>
+   <a class="btn btn-default btn-sm" role="button"><img width=20px src="${req.static_url('lietlahti:static/icons/mail.png')}">${contacts.get('email')}</a> 
+   <a class="btn btn-default btn-sm" role="button"><img width=20px src="${req.static_url('lietlahti:static/icons/vk.png')}">${contacts.get('vk')}</a>
+   <a class="btn btn-default btn-sm" role="button"><img width=20px src="${req.static_url('lietlahti:static/icons/instagramm.png')}">${contacts.get('instagramm')}</a>
     <nav class="navbar navbar-default" role="navigation">
       <a class="navbar-brand"><p><img alt="Brand" width=20px src="${req.static_url('lietlahti:static/favicon.png')}"> ${pagename | n}</p></a>
       <div class="container-fluid">
-
 	<p class="navbar-text navbar-right">
   	  % if auth:
 	    Здравствуйте, ${authuser}! 
