@@ -16,8 +16,6 @@ TODO:
 ==================
 - main page: last articles, news - categories, etc
 
-- Text edition tool for new article - markdown to html or so
-
 - Pictures upload: http://blueimp.github.io/jQuery-File-Upload/angularjs.html
 
 - add socialbuttons - for every publications on the bottom of the page for social sharing

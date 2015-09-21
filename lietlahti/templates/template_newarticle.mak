@@ -2,7 +2,7 @@
 <%inherit file="lietlahti:templates/template_base.mak"/>
 
 <script src="//tinymce.cachefly.net/4.2/tinymce.min.js"></script>
-<script>tinymce.init({selector:'textarea#inputArticle'});</script>
+<script>tinymce.init({selector:'textarea#inputArticle',plugins: "code"});</script>
 
 <script type="text/javascript">
  $(document).ready(function(){
