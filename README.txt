@@ -1,4 +1,4 @@
-caas README
+README
 ==================
 
 Getting Started
