@@ -109,12 +109,13 @@ def main_view(request):
 @view_config(route_name='article', renderer='template_article.mak')
 def article_view(request):
 	cfg = request.registry.settings
+	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	recaptcha_key = cfg.get('recaptcha.public', False)
 	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 	article_url = request.matchdict.get('url', None)
 	article = DBSession.query(Article).filter(Article.url==article_url).first()
 	comments = DBSession.query(Post).filter(Post.page==article_url)
-	tpldef = {'article':article, 'pagename':article.mainname, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header}
+	tpldef = {'article':article, 'pagename':article.mainname, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header, 'contacts':contacts}
 	if authenticated_userid(request):
 		tpldef.update({'auth':True, 'authuser':authenticated_userid(request)})
 	return tpldef
@@ -129,10 +130,13 @@ def add_article(request):
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
 	if not request.POST:
+		cfg = request.registry.settings
+		contacts = Contacts(cfg.get('lietlahti.contacts', None))
+
 		tpldef = {}
 		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 		article_series = set([s.series for s in DBSession.query(Article).all()])
-		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header})
+		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header, 'contacts':contacts})
 		return tpldef
 	else:
 		csrf = request.POST.get('csrf', '')
@@ -250,6 +254,8 @@ def discuss_view(request):
 	first = 0
 	last = 20
 	page = request.matchdict.get('page', None)
+	cfg = request.registry.settings
+	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 
 	if not authenticated_userid(request):
 		request.session.flash({
@@ -283,7 +289,8 @@ def discuss_view(request):
 				  'authuser':authenticated_userid(request),
 				  'auth':True,
 				  'pagename':"""<span class="glyphicon glyphicon-comment"></span>""",#.join([x.name for x in users])),
-				  'newcomments':newcomments
+				  'newcomments':newcomments,
+				  'contacts':contacts
 				  }
 		return tpldef
 
@@ -291,6 +298,9 @@ def discuss_view(request):
 def login_view(request):
 	login = ''
 	did_fail = False
+	cfg = request.registry.settings
+	contacts = Contacts(cfg.get('lietlahti.contacts', None))
+
 	nxt = request.route_url('home')
 	if authenticated_userid(request):
 		return HTTPSeeOther(location=nxt)
@@ -313,7 +323,8 @@ def login_view(request):
 		'login'       : login,
 		'articles'    : header,
 		'failed'      : did_fail,
-		'pagename'    : 'Вход'
+		'pagename'    : 'Вход',
+		'contacts'    : contacts
 		}
 	return tpldef
 
@@ -327,6 +338,9 @@ def pub_edit(request):
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
 	else:
+		cfg = request.registry.settings
+		contacts = Contacts(cfg.get('lietlahti.contacts', None))
+
 		pubtype = request.matchdict['pub']
 		pubid = request.matchdict['id']
 		if request.POST:
@@ -398,7 +412,8 @@ def pub_edit(request):
 					'authuser':authenticated_userid(request), 
 					'auth':True,
 					'pagename': 'Правка %s' % article.mainname,
-					'session_message':request.session.pop_flash()
+					'session_message':request.session.pop_flash(), 
+					'contacts':contacts
 					}
 				tpldef.update(articleparams)
 
