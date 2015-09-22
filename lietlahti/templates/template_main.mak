@@ -4,6 +4,12 @@
 
   
 
+<div class="panel panel-default">
+  <div class="panel-body">
+    <img src="http://pomoyka.homelinux.net/immortal/63f9c7e4-7d65-460a-9187-95f2bfa8a2a4.jpg" width=100%>
+  </div>
+</div>
+
 <!--  <div class="inner">
     <div class="col-md-10 col-md-offset-1" align='justify'>
       <div id="map" style="height: 335px">

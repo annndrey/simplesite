@@ -5,6 +5,18 @@
 <script>tinymce.init({selector:'textarea#inputArticle',plugins: "code"});</script>
 
 <script type="text/javascript">
+function changeposttype(){
+   
+   if($("#posttype option:selected").text() == 'Исходный код'){
+     //tinymce.execCommand('mceToggleEditor',true,'new-post-desc');
+     tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'inputArticle');
+   }else{
+     tinymce.EditorManager.execCommand('mceAddEditor',true, 'inputArticle');
+   }
+ }
+</script>
+
+<script type="text/javascript">
  $(document).ready(function(){
    $("#inputSeries").select2({
      /*width:'240px',*/
@@ -19,8 +31,8 @@
      var newTerm = $('#newTerm').val();
      //alert('adding:'+newTerm);
      $('<option>'+newTerm+'</option>').appendTo('#inputSeries');
-     $('#inputSeries').select2('val',newTerm); // select the new term
-     $("#inputSeries").select2('close');// close the dropdown
+     $('#inputSeries').select2('val',newTerm); 
+     $("#inputSeries").select2('close');
    })
  });
 </script>
@@ -215,7 +227,11 @@
 	      <textarea class="form-control" id="inputPrevText" name="inputPrevText" placeholder="Краткий текст для превью" rows=3></textarea>
 	    % endif
 	    
-     	    
+            <select id="posttype" class="form-control" onchange="changeposttype()">
+              <option>Визуальный редактор</option>
+              <option>Исходный код</option>
+            </select>
+
 	    % if edit:
      	      <textarea class="form-control" id="inputArticle" name="inputArticle" placeholder="Основной текст" rows=20>${article.maintext|n}</textarea>
 	    % else:
