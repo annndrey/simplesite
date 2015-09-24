@@ -2,47 +2,11 @@
 
 <%inherit file="lietlahti:templates/template_base.mak"/>
 
-  
+  <img class="img-responsive img-rounded hidden-xs" src="http://pomoyka.homelinux.net/immortal/94577fb5-7842-4681-8d24-1bba4b6e8ca8.png">
+  <p> </p>
 
-<div class="panel panel-default">
-  <div class="panel-body">
-    <img src="http://pomoyka.homelinux.net/immortal/63f9c7e4-7d65-460a-9187-95f2bfa8a2a4.jpg" width=100%>
-  </div>
-</div>
-
-<!--  <div class="inner">
-    <div class="col-md-10 col-md-offset-1" align='justify'>
-      <div id="map" style="height: 335px">
-	<script>
-	 var map = L.map('map').setView([51.505, -0.09], 1);
-	 L.tileLayer('https://{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
-	   maxZoom: 18,
-	   attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-		     '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-		     'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-	   id: 'annndrey.kg994dgi'
-	 }).addTo(map);
-	 % for art in articles:
-           % if art.status not in ('draft', 'private'):
-	      % if art.lat is not None:
-	         L.marker([${art.lat}, ${art.lon}]).addTo(map).bindPopup('<div class="thumbnail"><img alt="" class="media-object img-rounded" src="${art.previewpict}" width="140"/><div class="caption"><a href="${request.route_url('article', url=art.url)}">${art.mainname}</a><p>${art.descr}  :${art.status}:</p></div></div>');
-	 % endif
-	 % endif
-	 % endfor
-       var popup = L.popup();
-       function onMapClick(e) {
-	 popup
-	    .setLatLng(e.latlng)
-	    .setContent("You clicked the map at " + e.latlng.toString())
-	    .openOn(map);
-       }
-       map.on('click', onMapClick);
-      </script>
-    </div>
-  </div>
--->
   <div class="row">
-    <div class="col-md-8 col-md-offset-2" align='justify'>
+    <div class="col-md-12 " align='justify'>
       % if articles:
 	% for a in articles:
           % if a.series != 'mainpage':
@@ -53,10 +17,10 @@
 		  ##  <img alt='' class="media-object img-rounded" src="${a.previewpict}" width="140"/>
 		  ##</a>
 		  <div class="media-body">
-		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [${a.user}]</small></h4>
+		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
 		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
 		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
-	            
+	            </small></h4>
 		    <div class="modal fade modal-remove${a.id}" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		      <div class="modal-dialog">
 		        <div class="modal-content">
@@ -89,10 +53,10 @@
 		  ##  <img alt='' class="media-object img-rounded" src="${a.previewpict}" width="140"/>
 		  ##</a>
 		  <div class="media-body">
-		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [${a.user}]</small></h4>
+		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
 		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
 		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
-		    
+		    </small></h4>
 		    <div class="modal fade modal-remove${a.id}" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		      <div class="modal-dialog">
 		        <div class="modal-content">
@@ -127,11 +91,12 @@
                 ##<img alt='' class="media-object img-rounded pull-left" src="${a.previewpict}" width="140"/>
 	        ##</a>
 	        <div class="media-body">
-		  <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></h4>
+		  <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a>
 		  % if auth:
+                    <small>
 		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
 		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
-		    
+		    </small></h4>
 		    <div class="modal fade modal-remove${a.id}" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		      <div class="modal-dialog">
 		        <div class="modal-content">
