@@ -47,9 +47,14 @@ $(function()
             	  {
             	      // Success so call function to process the form
 		      var textarea = document.getElementsByName('userpost')[0];
+                      if(! textarea){
+                          var textarea = document.getElementsByName('inputArticle')[0];
+                      }
 		      var resp = jQuery.parseJSON(jqXHR.responseText);
-		      textarea.value = jqXHR.responseText.replace(/"/g, '');
-		      $('#uploadModal').modal('hide');
+                      textarea.value = jqXHR.responseText.replace(/"/g, '');
+                      $('#uploadModal').modal('hide');
+                      console.log(event.target);
+                      console.log(data);
             	      submitForm(event, data);
             	  }
             	  else

@@ -250,9 +250,9 @@ def add_new_post(request):
 @view_config(route_name='home_slash', renderer='template_discuss.mak')
 @view_config(route_name='home:page', renderer='template_discuss.mak')
 def discuss_view(request):
-	on_page = 20
+	on_page = 10
 	first = 0
-	last = 20
+	last = 10
 	page = request.matchdict.get('page', None)
 	cfg = request.registry.settings
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))

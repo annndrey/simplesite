@@ -1,10 +1,8 @@
 ## -*- coding: utf-8 -*-
 
 <%inherit file="lietlahti:templates/template_base.mak"/>
-
   <img class="img-responsive img-rounded hidden-xs" src="http://pomoyka.homelinux.net/immortal/94577fb5-7842-4681-8d24-1bba4b6e8ca8.png">
   <p> </p>
-
   <div class="row">
     <div class="col-md-12 " align='justify'>
       % if articles:
