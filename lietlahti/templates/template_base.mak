@@ -16,6 +16,7 @@
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/select2-bootstrap.css')}" type="text/css" />
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/bootstrap-glyphicons.css')}" type="text/css" />
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/font-awesome.css')}" type="text/css" />
+        <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/social-likes_birman.css')}" type="text/css" />
         
         <link rel="icon" type="image/png" href="${req.static_url('lietlahti:static/favicon.png')}" />
         <script type="text/javascript" src="${req.static_url('lietlahti:static/js/jquery.js')}"></script>
@@ -26,6 +27,7 @@
         <script type="text/javascript" src="${req.static_url('lietlahti:static/js/fileupload.js')}"></script>
         <script type="text/javascript" src="${req.static_url('lietlahti:static/js/select2.js')}"></script>
         <script type="text/javascript" src="${req.static_url('lietlahti:static/js/jquery.scrollorama.js')}"></script>
+        <script type="text/javascript" src="${req.static_url('lietlahti:static/js/social-likes.min.js')}"></script>
         <script type="text/javascript" src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script type="text/javascript">
          $(document).ready(function() {
@@ -120,16 +122,29 @@
                             ##   </div>
                             ## </div>
 	                    ##</form>
-                
+
 	                </p>
+
                     </div>
+                    <div class="social-likes pull-right">
+                        <div class="facebook" title="Share link on Facebook" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
+                        <div class="twitter" title="Share link on Twitter" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
+                        <div class="plusone" title="Share link on Google+" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
+                        <div class="pinterest" title="Share image on Pinterest" data-media="Лиетлахти, природно-этнографический парк" data-title="">&nbsp</div>
+                    </div>
+
                 </nav>
                 ${next.body()}
+                
+
                 <div id="push"></div>
             </div>
+            
             <div id="footer">
                 <div class="container">
-                    <p class="muted credit">LIETLAHTI, 2015, <a href="https://github.com/annndrey"><img src="http://pomoyka.homelinux.net/immortal/10fbbd32-7ad5-4872-b928-5f15c900e2be.png" width=20px></a></p>
+                    <p class="muted credit">LIETLAHTI, 2015, <a href="https://github.com/annndrey"><img src="http://pomoyka.homelinux.net/immortal/10fbbd32-7ad5-4872-b928-5f15c900e2be.png" width=20px></a>
+                    </p>
+                    
                 </div>
             </div>
         </div>

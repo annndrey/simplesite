@@ -14,8 +14,9 @@
               text: 'Upload',
               icon: false,
               onclick: function() {
-                  editor.insertContent('uploaded content');
-                  $( ".uploadModal" ).show();
+                  ##editor.insertContent('uploaded content');
+                  ##tinymce.get("uploadModal").show();
+                  $("#uploadModal" ).modal('show');//.show();
               }
           });
       }

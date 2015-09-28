@@ -28,9 +28,9 @@ $(function()
 		     data.append(key, value);
 		 });
 	  var checked = $('input[name="preserve"]:checked').length > 0;
-	  var posturl = 'upload?files';
+	  var posturl = '/upload?files';
 	  if (checked != 0) {
-	      posturl = 'upload?keep';
+	      posturl = '/upload?keep';
 	  }
           
           $.ajax({
@@ -51,16 +51,16 @@ $(function()
                           var textarea = document.getElementsByName('inputArticle')[0];
                       }
 		      var resp = jQuery.parseJSON(jqXHR.responseText);
+                      tinymce.activeEditor.execCommand('mceInsertContent', false, jqXHR.responseText.replace(/"/g, ''));
                       textarea.value = jqXHR.responseText.replace(/"/g, '');
-                      $('#uploadModal').modal('hide');
-                      console.log(event.target);
-                      console.log(data);
+                      $('#uploadModal').modal('toggle');
             	      submitForm(event, data);
             	  }
             	  else
             	  {
             	      // Handle errors here
             	      console.log('ERRORS: ' + data.error);
+                      console.log(data);
             	  }
               },
               error: function(jqXHR, textStatus, errorThrown)
