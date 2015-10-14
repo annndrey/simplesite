@@ -47,14 +47,17 @@ class Post(Base):
 class Article(Base):
 	__tablename__ = 'articles'
 	id = Column(Integer, primary_key=True)
-	mainname = Column(Unicode, unique=True)
+	mainname_ru = Column(Unicode, unique=True)
+	mainname_en = Column(Unicode, unique=True)
 	upname = Column(Unicode, unique=True)
 	keywords = Column(Unicode(length=600))
 	url = Column(Unicode, unique=True)
-	maintext = Column(LONGTEXT)
+	maintext_ru = Column(LONGTEXT)
+	maintext_en = Column(LONGTEXT)
 	descr = Column(Unicode(length=600))
 	series = Column(Unicode(length=600))
-	previewtext = Column(Text)
+	previewtext_ru = Column(Text)
+	previewtext_ru = Column(Text)
 	previewpict = Column(Unicode(length=600))
 	sep_url = Column(Unicode(length=200))
 	lat = Column(NUMERIC)
@@ -72,21 +75,37 @@ class Article(Base):
 		default='draft',
 		)
 
-	def __init__(self, mainname, upname, keywords, url, maintext, descr, pubtimestamp, user, sep_url, right_bracket_url, left_bracket_url, previewtext, previewpict, series, status):
-		self.mainname = mainname
+	def __init__(self, upname, keywords, url, descr, pubtimestamp, user, sep_url, right_bracket_url, left_bracket_url, previewpict, series, status, mainname_ru=None, mainname_en=None, maintext_ru=None, maintext_en=None, previewtext_ru=None, previewtext_en=None):
+		#localization
+		if mainname_ru is not None:
+			self.mainname_ru = mainname_ru
+		if mainname_en is not None:
+			self.mainname_en = mainname_en
+		if maintext_ru is not None:
+			self.maintext_ru = maintext_ru
+		if maintext_en is not None:
+			self.maintext_en = maintext_en
+		if previewtext_ru is not None:
+			self.previewtext_ru = previewtext_ru
+		if previewtext_en is not None:
+			self.previewtext_en = previewtext_en
+
 		self.upname = upname
 		self.keywords = keywords
 		self.url = url
-		self.maintext = maintext
 		self.descr = descr
 		self.user = user
 		self.sep_url = sep_url
 		self.left_bracket_url = left_bracket_url
 		self.right_bracket_url = right_bracket_url
-		self.previewtext = previewtext
 		self.previewpict = previewpict
 		self.series = series
 		self.status = status
+
+	def getvalue(self, colname, lang):
+		localized = "{0}_{1}".format(colname, lang)
+		if hasattr(self, localized):
+			return getattr(self, localized)
 
 #TODO md5 hash in password fields instead of plain text
 class User(Base):

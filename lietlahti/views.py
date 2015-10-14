@@ -92,13 +92,21 @@ class Contacts():
 				return contact
 		except:
 			pass
+@view_config(route_name='language')
+def language(req):
+	lang = req.params.get('lang', 'ru')
+	retpath = req.params.get('ret', '/')
+	req.session['lang'] = lang
+
+	return HTTPSeeOther(location=req.host_url + retpath)
 
 @view_config(route_name='main', renderer='template_main.mak')
 def main_view(request):
 	cfg = request.registry.settings
+	lang = request.session.get('lang', 'ru')
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	articles = DBSession.query(Article).order_by(Article.pubtimestamp.desc())
-	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':'Главная', 'contacts': contacts }
+	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':'Главная', 'contacts': contacts, 'lang':lang }
 	if authenticated_userid(request):
 		tpldef.update({
 				'auth':True,
@@ -109,13 +117,17 @@ def main_view(request):
 @view_config(route_name='article', renderer='template_article.mak')
 def article_view(request):
 	cfg = request.registry.settings
+	lang = request.session.get('lang', 'ru')
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	recaptcha_key = cfg.get('recaptcha.public', False)
 	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 	article_url = request.matchdict.get('url', None)
 	article = DBSession.query(Article).filter(Article.url==article_url).first()
 	comments = DBSession.query(Post).filter(Post.page==article_url)
-	tpldef = {'article':article, 'pagename':article.mainname, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header, 'contacts':contacts}
+	#correct localization
+	pagename = article.getvalue("mainname", lang)
+
+	tpldef = {'article':article, 'pagename':pagename, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header, 'contacts':contacts, 'lang':lang}
 	if authenticated_userid(request):
 		tpldef.update({'auth':True, 'authuser':authenticated_userid(request)})
 	return tpldef
@@ -132,32 +144,31 @@ def add_article(request):
 	if not request.POST:
 		cfg = request.registry.settings
 		contacts = Contacts(cfg.get('lietlahti.contacts', None))
-
+		lang = request.session.get('lang', 'ru')
 		tpldef = {}
 		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 		article_series = set([s.series for s in DBSession.query(Article).all()])
-		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header, 'contacts':contacts})
+		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header, 'contacts':contacts, 'lang':lang})
 		return tpldef
 	else:
 		csrf = request.POST.get('csrf', '')
 		if csrf == request.session.get_csrf_token():
-			art_name = request.POST.get('inputMainname', None)
+			#correct localization
+			art_name = request.POST.get('inputMainname_ru', None)
 			art_uppername = art_name
 			art_kwords = request.POST.get('inputKeywords', None)
 			art_descr = request.POST.get('inputDescr', None)
-			art_text = request.POST.get('inputArticle', None)
+			art_text = request.POST.get('inputArticle_ru', None)
 			art_url = request.POST.get('inputURL', None)
 			art_status = request.POST.get('inputStatus', None)
 			art_series = request.POST.get('inputSeries', None)
 			art_leftbr = request.POST.get('inputLeftBracket', None)
 			art_rightbr = request.POST.get('inputRightBracket', None)
 			art_sep = request.POST.get('inputSep', None)
-			art_prevtext = request.POST.get('inputPrevText', None)
+			art_prevtext = request.POST.get('inputPrevText_ru', None)
 			art_prevpict = request.POST.get('inputPrevPict', None)
-
+			#correct article fields
 			newarticle = Article(
-				art_name, 
-				art_uppername, 
 				art_kwords, 
 				art_url, 
 				art_text, 
@@ -170,7 +181,8 @@ def add_article(request):
 				art_prevtext, 
 				art_prevpict, 
 				art_series, 
-				art_status)
+				art_status,
+				mainname_ru=art_name)
 			DBSession.add(newarticle)
 			# new article added here
 		return HTTPSeeOther(location=request.route_url('main'))
@@ -219,6 +231,7 @@ def add_new_post(request):
 	succ = False
 	cfg = request.registry.settings
 	recaptcha_secret = cfg.get('recaptcha.secret', False)
+
 	if not request.POST:
 		return HTTPSeeOther(location=request.route_url('home'))
 	else:
@@ -250,6 +263,7 @@ def add_new_post(request):
 @view_config(route_name='home_slash', renderer='template_discuss.mak')
 @view_config(route_name='home:page', renderer='template_discuss.mak')
 def discuss_view(request):
+	lang = request.session.get('lang', 'ru')
 	on_page = 10
 	first = 0
 	last = 10
@@ -290,7 +304,8 @@ def discuss_view(request):
 				  'auth':True,
 				  'pagename':"""<span class="glyphicon glyphicon-comment"></span>""",#.join([x.name for x in users])),
 				  'newcomments':newcomments,
-				  'contacts':contacts
+				  'contacts':contacts,
+				  'lang':lang
 				  }
 		return tpldef
 
@@ -300,7 +315,7 @@ def login_view(request):
 	did_fail = False
 	cfg = request.registry.settings
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
-
+	lang = request.session.get('lang', 'ru')
 	nxt = request.route_url('home')
 	if authenticated_userid(request):
 		return HTTPSeeOther(location=nxt)
@@ -324,7 +339,9 @@ def login_view(request):
 		'articles'    : header,
 		'failed'      : did_fail,
 		'pagename'    : 'Вход',
-		'contacts'    : contacts
+		'contacts'    : contacts,
+		'lang'        : lang
+		
 		}
 	return tpldef
 
@@ -359,6 +376,8 @@ def pub_edit(request):
 				if csrf == request.session.get_csrf_token():
 					## GET other article params here
 					article = DBSession.query(Article).filter(Article.id==pubid).first()
+					#correct localization
+					#correct article fields
 					art_name = request.POST.get('inputMainname', None)
 					art_uppername = art_name
 					art_kwords = request.POST.get('inputKeywords', None)
@@ -403,6 +422,7 @@ def pub_edit(request):
 				header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 				article = DBSession.query(Article).filter(Article.id==pubid).first()
 				article_series = set([s.series for s in DBSession.query(Article).all()])
+				lang = request.session.get('lang', 'ru')
 				articleparams = {
 					'edit':True,
 					'article': article,
@@ -413,7 +433,8 @@ def pub_edit(request):
 					'auth':True,
 					'pagename': 'Правка %s' % article.mainname,
 					'session_message':request.session.pop_flash(), 
-					'contacts':contacts
+					'contacts':contacts,
+					'lang':lang
 					}
 				tpldef.update(articleparams)
 

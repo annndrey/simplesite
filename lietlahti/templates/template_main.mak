@@ -17,7 +17,7 @@
 		  ##  <img alt='' class="media-object img-rounded" src="${a.previewpict}" width="140"/>
 		  ##</a>
 		  <div class="media-body">
-		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
+		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
 		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
 		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
 	            </small></h4>
@@ -29,7 +29,7 @@
 			    <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
 			  </div>
 			  <div class="modal-body">
-			    Вы действительно хотите удалить статью <strong>"${a.mainname}"</strong>?
+			    Вы действительно хотите удалить статью <strong>"${a.getvalue("mainname", lang)}"</strong>?
 			  </div>
 			  <div class="modal-footer">
 			    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
@@ -38,8 +38,8 @@
 		        </div>
 		      </div>
 		    </div>
-		    % if a.previewtext is not None:
-		      <small>${a.previewtext}</small>
+		    % if a.getvalue("previewtext", lang) is not None:
+		      <small>${a.getvalue("previewtext", lang)}</small>
 		    % else:
 		      ...
 		    % endif
@@ -53,7 +53,7 @@
 		  ##  <img alt='' class="media-object img-rounded" src="${a.previewpict}" width="140"/>
 		  ##</a>
 		  <div class="media-body">
-		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
+		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
 		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
 		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
 		    </small></h4>
@@ -65,7 +65,7 @@
 			    <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
 			  </div>
 			  <div class="modal-body">
-			    Вы действительно хотите удалить статью <strong>"${a.mainname}"</strong>?
+			    Вы действительно хотите удалить статью <strong>"${a.getvalue("mainname", lang)}"</strong>?
 			  </div>
 			  <div class="modal-footer">
 			    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
@@ -74,8 +74,8 @@
 		        </div>
 		      </div>
 		    </div>  
-		    % if a.previewtext is not None:
-		      <small>${a.previewtext}</small>
+		    % if a.getvalue("previewtext", lang) is not None:
+		      <small>${a.getvalue("previewtext", lang)}</small>
 		    % else:
 		      ...
 		    % endif
@@ -91,7 +91,7 @@
                 ##<img alt='' class="media-object img-rounded pull-left" src="${a.previewpict}" width="140"/>
 	        ##</a>
 	        <div class="media-body">
-		  <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a>
+		  <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a>
 		  % if auth:
                     <small>
 		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
@@ -105,7 +105,7 @@
 			    <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
 			  </div>
 			  <div class="modal-body">
-			    Вы действительно хотите удалить статью <strong>"${a.mainname}"</strong>?
+			    Вы действительно хотите удалить статью <strong>"${a.getvalue("mainname", lang)}"</strong>?
 			  </div>
 			  <div class="modal-footer">
 			    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
@@ -116,8 +116,8 @@
 		    </div>
 		  % endif
                   
-		  % if a.previewtext is not None:
-		    <small>${a.previewtext}</small>
+		  % if a.getvalue("previewtext", lang) is not None:
+		    <small>${a.getvalue("previewtext", lang)}</small>
 		  % else:
 		    ...
 		  % endif

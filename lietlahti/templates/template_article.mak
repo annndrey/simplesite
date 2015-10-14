@@ -4,6 +4,12 @@
 
 <div class="inner">
     <div class="row">
+        <div class="social-likes pull-letf">
+            <div class="facebook" title="Share link on Facebook" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
+            <div class="twitter" title="Share link on Twitter" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
+            <div class="plusone" title="Share link on Google+" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
+            <div class="pinterest" title="Share image on Pinterest" data-media="Лиетлахти, природно-этнографический парк" data-title="">&nbsp</div>
+        </div>
         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2" align='justify'>
 	    % if article:
 	        <p>
@@ -18,7 +24,8 @@
 		                        <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
 		                    </div>
 		                    <div class="modal-body">
-		                        Вы действительно хотите удалить статью <strong>"${article.mainname}"</strong>?
+		                        Вы действительно хотите удалить статью <strong>"${article.getvalue("mainname", lang)}"</strong>?
+                                        ..
 		                    </div>
 		                    <div class="modal-footer">
 		                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
@@ -29,7 +36,11 @@
 	                </div>  
 	            % endif 
 	        </p>
-                ${article.maintext|n}
+                % if article.getvalue("maintext", lang) is not None:
+                    ${article.getvalue("maintext", lang)|n}
+                % else:
+                    Nothing to see here :(
+                % endif
 	    % else:
 	        There's no such article
 	    % endif  	

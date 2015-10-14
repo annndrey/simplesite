@@ -35,7 +35,6 @@
          });    
         </script>
         
-        </script>
         <script type="text/javascript">
          $(window).load( function() {
              $('.photoset-grid-lightbox').photosetGrid({
@@ -56,7 +55,14 @@
              });
          });
         </script>
-        
+        <script type="text/javascript">
+         $(document).ready(function() {
+             $('select#lang').on('change', function() {
+                 var lang = $(this).val();
+                 window.location = "/language"+'?lang='+lang+"&ret="+"${req.path_qs}";
+             });
+         });
+        </script>
     </head>
     
 
@@ -70,7 +76,11 @@
                     <a class="btn btn-default btn-sm" href="${contacts.get('instagramm')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/instagramm.png')}"> <span class="hidden-xs hidden-sm">${contacts.get('instagramm')}</span></a>
                 </div>
                 <nav  class="navbar navbar-default" role="navigation">
-                    <a class="navbar-brand"><p><img alt="Brand" width=20px src="${req.static_url('lietlahti:static/favicon.png')}"> ${pagename | n}</p></a>
+                    % if pagename:
+                        <a class="navbar-brand"><p><img alt="Brand" width=20px src="${req.static_url('lietlahti:static/favicon.png')}"> ${pagename | n}</p></a>
+                    % else:
+                        <a class="navbar-brand"><p><img alt="Brand" width=20px src="${req.static_url('lietlahti:static/favicon.png')}"> ${pagename }</p></a>
+                    % endif
                     <div class="container-fluid">
                         <p class="navbar-text navbar-right">
                             % if auth:
@@ -81,6 +91,7 @@
 	                            <a href="${request.route_url('login')}">Вход <span class="glyphicon glyphicon-log-in"></a>
 	                        % endif  
 	                    % endif
+                            
 	                    <ul class="nav navbar-nav">
                                 ##
 	                    % if request.current_route_url() != request.route_url('main'):
@@ -92,10 +103,10 @@
                                     % if a.series == 'mainpage':
                                         % if article:
                                             % if article.id != a.id:
-                                                <li><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></li>
+                                                <li><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a></li>
                                             % endif 
                                         % else:
-                                            <li><a href="${request.route_url('article', url=a.url)}">${a.mainname}</a></li>
+                                            <li><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a></li>
                                         % endif
                                     % endif
                                 % endfor
@@ -107,12 +118,23 @@
 	                        % else:
 		                    ## put a link here
 		                    ##<li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></li>
-		                    <li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="${"<br>".join(["В <a href={3}>{0}</a>  {1} написал: {2} ".format(p.article.mainname, p.name, p.post, request.route_url('article', url=p.page)) for p in newcomments]) }"  data-original-title="Новые комментарии" data-placement="bottom"> новые комментарии <span class="badge">${str(newcomments.count())}</span></a></li>
+		                    <li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="${"<br>".join(["В <a href={3}>{0}</a>  {1} написал: {2} ".format(p.article.getvalue("mainname", lang), p.name, p.post, request.route_url('article', url=p.page)) for p in newcomments]) }"  data-original-title="Новые комментарии" data-placement="bottom"> новые комментарии <span class="badge">${str(newcomments.count())}</span></a></li>
 	                        % endif
 	                        % if request.current_route_url() != request.route_url('newarticle'):
 		                    <li><a href="${request.route_url('newarticle')}" title="Новая публикация"><span class="glyphicon glyphicon-pencil"></span></a></li>
 	                        % endif
 	                    % endif
+                            <li>
+                                <select id='lang' class="btn btn-default btn-sm" style="margin-top:10px">
+                                    % if lang and lang == 'en': 
+                                        <option>ru</option>
+                                        <option selected>en</option>
+                                    % else:
+                                        <option selected>ru</option>
+                                        <option>en</option>
+                                    % endif
+                                </select>
+                            </li>
 	                    </ul>
 	                    ##<form class="navbar-form " role="search">
 	                    ## <div class="input-group col-sm-3 col-md-3 col-lg-3">
@@ -124,15 +146,7 @@
 	                    ##</form>
 
 	                </p>
-
                     </div>
-                    <div class="social-likes pull-right">
-                        <div class="facebook" title="Share link on Facebook" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
-                        <div class="twitter" title="Share link on Twitter" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
-                        <div class="plusone" title="Share link on Google+" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
-                        <div class="pinterest" title="Share image on Pinterest" data-media="Лиетлахти, природно-этнографический парк" data-title="">&nbsp</div>
-                    </div>
-
                 </nav>
                 ${next.body()}
                 

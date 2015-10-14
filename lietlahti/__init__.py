@@ -30,6 +30,7 @@ def main(global_config, **settings):
 	config.add_route('home_slash', '/discuss/')
 	config.add_route('home:page', '/discuss/{page:\d+}')
 	config.add_route('login', '/login')
+	config.add_route('language', '/language')
 	config.add_route('edit', '/edit/{pub:\w+}/{id:\d+}')
 	config.add_route('newarticle', '/newarticle')
 	config.add_route('article', '/article/{url:\w+}')
