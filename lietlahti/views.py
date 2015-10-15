@@ -41,46 +41,6 @@ from .models import (
 _re_login = re.compile(r'^[\w\d._-]+$')
 article_status = {'draft':'Черновик', 'ready':'Готово', 'private':'Не трогать!'}
 
-x=datetime.datetime.today()
-try:
-	y=x.replace(day=x.day+1, hour=1, minute=0, second=0, microsecond=0)
-except ValueError:
-	y=x.replace(day=x.day, hour=1, minute=0, second=0, microsecond=0)
-delta_t=y-x
-secs=delta_t.seconds+1
-
-def calculate_age(born):
-	today = datetime.date.today()
-	return (today.year - born.year - ((today.month, today.day) < (born.month, born.day))) + 1
-
-def post_stuff():
-	sess = DBSession()
-	tomorrow = datetime.date.today()+datetime.timedelta(days=1)
-	users = sess.query(User).filter(func.DATE_FORMAT(User.bday, "%d_%m")==tomorrow.strftime("%d_%m")).all()
-	print("TIMER DEBUGGING", datetime.datetime.now())
-	if len(users) > 0:
-		for u in users:
-			
-			message = "Совесть кааса напоминает, завтра у <b>{0}</b>  {1} день рождения!!!1".format(u.name, calculate_age(u.bday))
-			prev_greetings = sess.query(Post).filter(Post.post==message).all()
-
-			if len(prev_greetings) > 0:
-				pass
-			else:
-				newpost = Post(date = datetime.datetime.now(), page='discuss', name='lietlahti', ip='127.0.0.1', post=message, articleid=None)
-				sess.add(newpost)
-				sess.flush()
-	#else:
-	print("New timer is calling")
-	timer_callback()
-
-def timer_callback():
-	print("Timer started")
-	t = Timer(secs, post_stuff)
-	t.start()
-
-#post_stuff()
-
 class Contacts():
 	def __init__(self, conf):
 		self.config = json.loads(conf)
@@ -92,6 +52,7 @@ class Contacts():
 				return contact
 		except:
 			pass
+
 @view_config(route_name='language')
 def language(req):
 	lang = req.params.get('lang', 'ru')
@@ -124,7 +85,6 @@ def article_view(request):
 	article_url = request.matchdict.get('url', None)
 	article = DBSession.query(Article).filter(Article.url==article_url).first()
 	comments = DBSession.query(Post).filter(Post.page==article_url)
-	#correct localization
 	pagename = article.getvalue("mainname", lang)
 
 	tpldef = {'article':article, 'pagename':pagename, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header, 'contacts':contacts, 'lang':lang}
@@ -153,7 +113,9 @@ def add_article(request):
 	else:
 		csrf = request.POST.get('csrf', '')
 		if csrf == request.session.get_csrf_token():
-			#correct localization
+			#correct localization!!!1
+			#add language-specific fields, 
+			#here we should have ALL languages at the same time
 			art_name = request.POST.get('inputMainname_ru', None)
 			art_uppername = art_name
 			art_kwords = request.POST.get('inputKeywords', None)
@@ -347,7 +309,8 @@ def login_view(request):
 
 @view_config(route_name='edit', renderer='template_newarticle.mak')
 def pub_edit(request):
-	tpldef = {}
+	alllang = ['ru', 'en']
+	tpldef = {'alllang':alllang,}
 	if not authenticated_userid(request):
 		request.session.flash({
 				'class' : 'warning',
@@ -378,40 +341,32 @@ def pub_edit(request):
 					article = DBSession.query(Article).filter(Article.id==pubid).first()
 					#correct localization
 					#correct article fields
-					art_name = request.POST.get('inputMainname', None)
-					art_uppername = art_name
-					art_kwords = request.POST.get('inputKeywords', None)
-					art_status = request.POST.get('inputStatus', None)
-					art_descr = request.POST.get('inputDescr', None)
-					art_text = request.POST.get('inputArticle', None)
-					art_url = request.POST.get('inputURL', None)
-					art_series = request.POST.get('inputSeries', None)
-					art_lat = request.POST.get('lat', None)
-					art_lon = request.POST.get('lon', None)
-					art_leftbr = request.POST.get('inputLeftBracket', None)
-					art_rightbr = request.POST.get('inputRightBracket', None)
-					art_sep = request.POST.get('inputSep', None)
-					art_prevtext = request.POST.get('inputPrevText', None)
-					art_prevpict = request.POST.get('inputPrevPict', None)
-					if len(art_prevtext) < 1:
-						art_prevtext = None
+					
+					inputdict = {}
+					for k in request.POST.keys():
+						if k.startswith("input"):
+							inputdict[k] = request.POST.get(k, None)
+
+					for lng in alllang:
+						mainname = "{0}_{1}".format("mainname", lng)
+						maintext = "{0}_{1}".format("maintext", lng)
+						prevtext = "{0}_{1}".format("prevtext", lng)
+
+						article.setvalue(mainname, inputdict["inputMainname_"+lng])
+						article.setvalue(maintext, inputdict["inputArticle_"+lng])
+						article.setvalue(prevtext, inputdict["inputPrevText_"+lng])
+
+
+					art_kwords = inputdict['inputKeywords']
+					art_status = inputdict['inputStatus']
+					art_url = inputdict['inputURL']
+					art_series = inputdict['inputSeries']
+
 					#SET them to the aricle
-					article.mainname = art_name
-					article.uppername = art_name
 					article.keywords = art_kwords
-					article.descr = art_descr
 					article.url = art_url
 					article.series = art_series
-					article.lat = art_lat
-					article.lon = art_lon
-					article.sep_url = art_sep
-					article.right_bracket_url = art_rightbr
-					article.left_bracket_url = art_leftbr
-					article.previewtext = art_prevtext
-					article.previewpict = art_prevpict
-
 					article.status = art_status
-					article.maintext = art_text
 					article.user = authenticated_userid(request)
 					article.edittimestamp = datetime.datetime.now()
 					DBSession.add(article)
@@ -431,7 +386,7 @@ def pub_edit(request):
 					'article_series':article_series,
 					'authuser':authenticated_userid(request), 
 					'auth':True,
-					'pagename': 'Правка %s' % article.mainname,
+					'pagename': 'Правка %s' % article.getvalue("mainname", lang),
 					'session_message':request.session.pop_flash(), 
 					'contacts':contacts,
 					'lang':lang

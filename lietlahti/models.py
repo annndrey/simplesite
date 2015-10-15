@@ -107,6 +107,10 @@ class Article(Base):
 		if hasattr(self, localized):
 			return getattr(self, localized)
 
+	def setvalue(self, colname, value):
+		if hasattr(self, colname):
+			self.__setattr__(colname, value)
+
 #TODO md5 hash in password fields instead of plain text
 class User(Base):
 	__tablename__ = 'users'
