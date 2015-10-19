@@ -57,7 +57,7 @@ class Article(Base):
 	descr = Column(Unicode(length=600))
 	series = Column(Unicode(length=600))
 	previewtext_ru = Column(Text)
-	previewtext_ru = Column(Text)
+	previewtext_en = Column(Text)
 	previewpict = Column(Unicode(length=600))
 	sep_url = Column(Unicode(length=200))
 	lat = Column(NUMERIC)

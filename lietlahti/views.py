@@ -24,6 +24,7 @@ import json
 import codecs
 import datetime, time
 import sched
+import transaction
 import re 
 from threading import Timer
 from urllib.request import urlopen
@@ -311,6 +312,7 @@ def login_view(request):
 def pub_edit(request):
 	alllang = ['ru', 'en']
 	tpldef = {'alllang':alllang,}
+
 	if not authenticated_userid(request):
 		request.session.flash({
 				'class' : 'warning',
@@ -332,6 +334,7 @@ def pub_edit(request):
 					if post.name == authenticated_userid(request):
 						post.post = newpost
 						DBSession.add(post)
+						transaction.commit()
 						return HTTPSeeOther(location=request.referrer)
 
 			elif pubtype == 'article':
@@ -350,7 +353,7 @@ def pub_edit(request):
 					for lng in alllang:
 						mainname = "{0}_{1}".format("mainname", lng)
 						maintext = "{0}_{1}".format("maintext", lng)
-						prevtext = "{0}_{1}".format("prevtext", lng)
+						prevtext = "{0}_{1}".format("previewtext", lng)
 
 						article.setvalue(mainname, inputdict["inputMainname_"+lng])
 						article.setvalue(maintext, inputdict["inputArticle_"+lng])
@@ -369,7 +372,10 @@ def pub_edit(request):
 					article.status = art_status
 					article.user = authenticated_userid(request)
 					article.edittimestamp = datetime.datetime.now()
+					print("@@@@@@@@@@@@")
+					print(article.maintext_en, article.previewtext_en, article.mainname_en)
 					DBSession.add(article)
+					transaction.commit()
 					request.session.flash('edited')
 					return HTTPSeeOther(location=request.referrer)
 		else:
@@ -389,7 +395,7 @@ def pub_edit(request):
 					'pagename': 'Правка %s' % article.getvalue("mainname", lang),
 					'session_message':request.session.pop_flash(), 
 					'contacts':contacts,
-					'lang':lang
+					'lang':lang,
 					}
 				tpldef.update(articleparams)
 
