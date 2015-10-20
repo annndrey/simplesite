@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
  function changeposttype(){
-     if($("#posttype option:selected").text() == ${_('Исходный код')}){
+     if($("#posttype option:selected").text() == '${_('Исходный код')}'){
          //tinymce.execCommand('mceToggleEditor',true,'new-post-desc');
          tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'inputArticle_ru');
          tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'inputArticle_en');
@@ -43,7 +43,7 @@
          allowClear:true,
          formatNoMatches: function(term) {
              /* customize the no matches output */
-             return "<input class='form-control' id='newTerm' value='"+term+"'><a href='#' id='addNew' class='btn btn-default'>${_(Создать)}</a>"
+             return "<input class='form-control' id='newTerm' value='"+term+"'><a href='#' id='addNew' class='btn btn-default'>${_('Создать')}</a>"
          }
      })
                       .parent().find('.select2-with-searchbox').on('click','#addNew',function(){
@@ -59,7 +59,7 @@
 
 <div class="inner"> 
     % if session_message and session_message[0]=='edited':
-	<div class="alert alert-success" role="alert">${_('Публикация сохранена')}! <a href="${request.route_url('article', url=article.url)}">${_(Посмотреть)}</a></div>
+	<div class="alert alert-success" role="alert">${_('Публикация сохранена')}! <a href="${request.route_url('article', url=article.url)}">${_('Посмотреть')}</a></div>
     % endif
     <div class="col-md-offset-1">
         % if not edit:
@@ -73,9 +73,9 @@
 	        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" align='justify'>
 	            <div class="form-group">
                         
-                        <label for="${"inputMainname_"+lng}" class="col-md-2 control-label">${_(Название)} (${lng})</label>
+                        <label for="${"inputMainname_"+lng}" class="col-md-2 control-label">${_('Название')} (${lng})</label>
 	                <div class="col-md-5">
-	                    <input type="text" class="form-control" id=${"inputMainname_"+lng} name=${"inputMainname_"+lng} placeholder="${_(Название)} (${lng})" 
+	                    <input type="text" class="form-control" id=${"inputMainname_"+lng} name=${"inputMainname_"+lng} placeholder="${_('Название')} (${lng})" 
 		                   % if edit:
 		                   value="${article.getvalue("mainname", lng)}"
 		                   % endif
@@ -105,7 +105,7 @@
         <div class="row">
 	    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" align='justify'>
 	        <div class="form-group">
-                    <label for="inputStatus" class="col-md-2 control-label">${_(Статус)}</label>
+                    <label for="inputStatus" class="col-md-2 control-label">${_('Статус')}</label>
                     <div class="col-md-10">
 		        <select class="form-control" id="inputStatus" name="inputStatus">
 		            % for s in article_status.keys():
@@ -217,8 +217,8 @@
 	            % endfor
 	            <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
                     <a data-toggle="modal" data-target="#uploadModal" class="btn btn-default pull-right">${_('Загрузить файл')}</a>
-	            <a href="${req.referrer}" type="button" class="btn btn-default pull-right">${_(Отменить)}</a>
-	            <button type="submit" class="btn btn-default pull-right" id="submit" name="submit" title="${_(Сохранить)}" tabindex="3">${_(Сохранить)}</button>
+	            <a href="${req.referrer}" type="button" class="btn btn-default pull-right">${_('Отменить')}</a>
+	            <button type="submit" class="btn btn-default pull-right" id="submit" name="submit" title="${_('Сохранить')}" tabindex="3">${_('Сохранить')}</button>
 	        </div>
 	    </div>
         </div>
@@ -244,8 +244,8 @@
 		                    <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 		                </div>
       		                <div class="modal-footer">
-		                    <button type="button" class="btn btn-default" data-dismiss="modal">${_(Закрыть)}</button>
-		                    <button type="submit" class="btn btn-primary">${_(Загрузить)}</button>
+		                    <button type="button" class="btn btn-default" data-dismiss="modal">${_('Закрыть')}</button>
+		                    <button type="submit" class="btn btn-primary">${_('Загрузить')}</button>
 		                </div>
 	                    </form>
 	                </div>

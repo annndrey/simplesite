@@ -7,14 +7,14 @@
   <%def name="navbar(page, maxpage)">
     <ul class="pager">
       % if not page:
-	<li class="previous disabled"><a href="${request.route_url('home')}"> &larr; ${_(Вперед)}</a></li>
-	<li class="next"><a href="${request.route_url('home')}/2">${_(Назад)} &rarr;</a></li>
+	<li class="previous disabled"><a href="${request.route_url('home')}"> &larr; ${_('Вперед')}</a></li>
+	<li class="next"><a href="${request.route_url('home')}/2">${_('Назад')} &rarr;</a></li>
       % else:
-	<li class="previous"><a href="${request.route_url('home')}/${page}"> &larr; ${_(Вперед)}</a></li>
+	<li class="previous"><a href="${request.route_url('home')}/${page}"> &larr; ${_('Вперед')}</a></li>
 	% if int(page) < int(maxpage):
-	  <li class="next"><a href="${request.route_url('home')}/${page + 2}">${_(Назад)} &rarr;</a></li>
+	  <li class="next"><a href="${request.route_url('home')}/${page + 2}">${_('Назад')} &rarr;</a></li>
 	% else:
-	  <li class="next disabled"><a href="${request.route_url('home')}/${page + 1}">${_(Назад)} &rarr;</a></li>
+	  <li class="next disabled"><a href="${request.route_url('home')}/${page + 1}">${_('Назад')} &rarr;</a></li>
 	% endif
       % endif  
     </ul>
@@ -29,10 +29,10 @@
      	    <textarea class="form-control" id="userpost" name="userpost" placeholder=${_("Куку!")} rows=2></textarea>
 	    <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 	    <input type="hidden" id="ppage" name="ppage" value="discuss" />
-	    <button style="margin: 10px 0; margin-left: 2px;" type="submit" class="btn btn-default pull-right" id="submit" name="submit" title=${_("Послать")} tabindex="3">${_(Послать)}</button>
-	    <a style="margin: 10px 0; margin-left: 2px;" href="javascript:void(0);" class="btn btn-default pull-right" onclick="injectText('userpost','link');" >${_(Ссылка)}</a> 
-	    <a style="margin: 10px 0; margin-left: 2px;" href="javascript:void(0);" class="btn btn-default pull-right" onclick="injectText('userpost','pict');" >${_(Картинка)}</a>
-	    <a style="margin: 10px 0; margin-left: 2px;" data-toggle="modal" data-target="#uploadModal" class="btn btn-default pull-right">${_(Загрузить)}</a>
+	    <button style="margin: 10px 0; margin-left: 2px;" type="submit" class="btn btn-default pull-right" id="submit" name="submit" title=${_("Послать")} tabindex="3">${_('Послать')}</button>
+	    <a style="margin: 10px 0; margin-left: 2px;" href="javascript:void(0);" class="btn btn-default pull-right" onclick="injectText('userpost','link');" >${_('Ссылка')}</a> 
+	    <a style="margin: 10px 0; margin-left: 2px;" href="javascript:void(0);" class="btn btn-default pull-right" onclick="injectText('userpost','pict');" >${_('Картинка')}</a>
+	    <a style="margin: 10px 0; margin-left: 2px;" data-toggle="modal" data-target="#uploadModal" class="btn btn-default pull-right">${_('Загрузить')}</a>
      	  </div>
 	</div>
       </form>
@@ -56,8 +56,8 @@
 		  <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 		</div>
       		<div class="modal-footer">
-		  <button type="button" class="btn btn-default" data-dismiss="modal">${_(Закрыть)}</button>
-		  <button type="submit" class="btn btn-primary">${_(Загрузить)}</button>
+		  <button type="button" class="btn btn-default" data-dismiss="modal">${_('Закрыть')}</button>
+		  <button type="submit" class="btn btn-primary">${_('Загрузить')}</button>
 		</div>
 	      </form>
 	    </div>
@@ -89,8 +89,8 @@
 			  <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
       		      </div>
       		      <div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal">${_(Закрыть)}</button>
-        		<button type="submit" class="btn btn-primary">${_(Сохранить)}</button>
+        		<button type="button" class="btn btn-default" data-dismiss="modal">${_('Закрыть')}</button>
+        		<button type="submit" class="btn btn-primary">${_('Сохранить')}</button>
 			</form>
 		      </div>
 		    </div>
@@ -109,7 +109,7 @@
       			  <a href="${request.route_url('remove', pub='post', id=p.id)}">${_('Да, удалите немедленно')}!</a>
 			</div>
 			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отменить)}</button>
+			  <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отменить')}</button>
 			</div>
 		      </div>
 		    </div>

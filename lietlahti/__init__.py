@@ -26,6 +26,11 @@ def main(global_config, **settings):
 	Base.metadata.bind = engine
 	config = Configurator(settings=settings, session_factory=sessionfactory)
 	config.add_translation_dirs('lietlahti:locale/')
+	config.set_locale_negotiator(my_locale_negotiator)
+	config.add_subscriber('lietlahti.subscribers.add_renderer_globals',
+						  'pyramid.events.BeforeRender')
+	config.add_subscriber('lietlahti.subscribers.add_localizer',
+						  'pyramid.events.NewRequest')
 	config.include('pyramid_mako')
 	config.set_authentication_policy(authn_policy)
 	config.set_authorization_policy(authz_policy)
@@ -46,3 +51,7 @@ def main(global_config, **settings):
 	config.scan()
 	return config.make_wsgi_app()
 
+
+def my_locale_negotiator(request):
+	locale_name = request.session.get('lang')
+	return locale_name

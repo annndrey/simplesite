@@ -7,9 +7,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: lietlahti 0.0\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2015-10-20 17:13+0300\n"
-"PO-Revision-Date: 2015-10-20 17:11+0300\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2015-10-20 13:51+0300\n"
+"PO-Revision-Date: 2015-10-20 13:12+0300\n"
+"Last-Translator: annndrey <gontchar@gmail.com>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
@@ -18,49 +18,46 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.1.1\n"
 
-#: lietlahti/views.py:80
+#: lietlahti/views.py:77
 msgid "трололо"
 msgstr "trololo"
 
-#: lietlahti/views.py:88 lietlahti/templates/template_base.mak:98
+#: lietlahti/views.py:83 lietlahti/templates/template_base.mak:98
 msgid "Главная"
 msgstr "Main Page"
 
-#: lietlahti/views.py:121 lietlahti/views.py:257 lietlahti/views.py:432
+#: lietlahti/views.py:116 lietlahti/views.py:252 lietlahti/views.py:424
 msgid "Войдите чтобы увидеть эту страницу"
 msgstr "Sign in to access this page"
 
-#: lietlahti/views.py:324 lietlahti/templates/template_base.mak:91
+#: lietlahti/views.py:317 lietlahti/templates/template_base.mak:91
 msgid "Вход"
 msgstr "Sign in"
 
-#: lietlahti/views.py:340
+#: lietlahti/views.py:333
 msgid "Нужно войти чтобы увидеть эту страницу"
 msgstr "You should be signed in to access this page"
 
-#: lietlahti/views.py:414
-msgid "Правка"
-msgstr "Edit"
+#: lietlahti/views.py:407
+#, python-format
+msgid "Правка %s"
+msgstr "Edit %s"
 
-#: lietlahti/templates/login.mak:15
+#: lietlahti/templates/login.mak:18
 msgid "имя"
 msgstr "name"
 
-#: lietlahti/templates/login.mak:15
+#: lietlahti/templates/login.mak:18
 msgid "Введите имя пользователя"
-msgstr "Enter user name"
+msgstr "Enter username"
 
-#: lietlahti/templates/login.mak:16
+#: lietlahti/templates/login.mak:19
 msgid "пароль"
 msgstr "password"
 
-#: lietlahti/templates/login.mak:16
+#: lietlahti/templates/login.mak:19
 msgid "Введите пароль"
 msgstr "Enter password"
-
-#: lietlahti/templates/login.mak:17
-msgid "Войти"
-msgstr "Sign in"
 
 #: lietlahti/templates/template_article.mak:8
 #: lietlahti/templates/template_article.mak:9
@@ -68,56 +65,21 @@ msgstr "Sign in"
 #: lietlahti/templates/template_article.mak:11
 #: lietlahti/templates/template_base.mak:10
 msgid "Лиетлахти, природно-этнографический парк"
-msgstr "Lietlahti, Nature and Ethnographical Reserve"
-
-#: lietlahti/templates/template_article.mak:17
-#: lietlahti/templates/template_main.mak:21
-#: lietlahti/templates/template_main.mak:57
-#: lietlahti/templates/template_main.mak:97
-msgid "Править"
-msgstr "Edit"
-
-#: lietlahti/templates/template_article.mak:18
-#: lietlahti/templates/template_article.mak:32
-#: lietlahti/templates/template_main.mak:22
-#: lietlahti/templates/template_main.mak:36
-#: lietlahti/templates/template_main.mak:58
-#: lietlahti/templates/template_main.mak:72
-#: lietlahti/templates/template_main.mak:98
-#: lietlahti/templates/template_main.mak:112
-msgid "Удалить"
-msgstr "Delete"
-
-#: lietlahti/templates/template_article.mak:23
-#: lietlahti/templates/template_article.mak:73
-#: lietlahti/templates/template_discuss.mak:59
-#: lietlahti/templates/template_discuss.mak:92
-#: lietlahti/templates/template_main.mak:28
-#: lietlahti/templates/template_main.mak:104
-#: lietlahti/templates/template_newarticle.mak:247
-msgid "Закрыть"
-msgstr "Close"
+msgstr "Lietlahti, Natural and Ethnographic Reserve"
 
 #: lietlahti/templates/template_article.mak:24
 #: lietlahti/templates/template_main.mak:29
 #: lietlahti/templates/template_main.mak:65
 #: lietlahti/templates/template_main.mak:105
 msgid "Удаление статьи"
-msgstr "Delete article"
+msgstr "Delete Article"
 
 #: lietlahti/templates/template_article.mak:27
 #: lietlahti/templates/template_main.mak:32
 #: lietlahti/templates/template_main.mak:68
 #: lietlahti/templates/template_main.mak:108
 msgid "Вы действительно хотите удалить статью"
-msgstr "Are you sure to delete article"
-
-#: lietlahti/templates/template_article.mak:31
-#: lietlahti/templates/template_main.mak:35
-#: lietlahti/templates/template_main.mak:71
-#: lietlahti/templates/template_main.mak:111
-msgid "Отмена"
-msgstr "Cancel"
+msgstr "Are you sure to delete"
 
 #: lietlahti/templates/template_article.mak:42
 msgid "Ничего нет"
@@ -132,12 +94,6 @@ msgstr "There's no such article"
 msgid "Правка записи"
 msgstr "Post edit"
 
-#: lietlahti/templates/template_article.mak:74
-#: lietlahti/templates/template_discuss.mak:93
-#: lietlahti/templates/template_newarticle.mak:221
-msgid "Сохранить"
-msgstr "Save"
-
 #: lietlahti/templates/template_article.mak:87
 #: lietlahti/templates/template_discuss.mak:106
 msgid "Удаление записи"
@@ -146,17 +102,11 @@ msgstr "Post delete"
 #: lietlahti/templates/template_article.mak:90
 #: lietlahti/templates/template_discuss.mak:109
 msgid "Да, удалите немедленно"
-msgstr "Yes, delete it now"
-
-#: lietlahti/templates/template_article.mak:93
-#: lietlahti/templates/template_discuss.mak:112
-#: lietlahti/templates/template_newarticle.mak:220
-msgid "Отменить"
-msgstr "Cancel"
+msgstr "Yes, delete right now"
 
 #: lietlahti/templates/template_article.mak:117
 msgid "Представьтесь пожалуйста"
-msgstr "Sign in please"
+msgstr "Your name, please"
 
 #: lietlahti/templates/template_article.mak:120
 msgid "Оставьте комментарий..."
@@ -167,17 +117,9 @@ msgstr "Leave a comment..."
 msgid "Послать"
 msgstr "Send"
 
-#: lietlahti/templates/template_base.mak:87
-msgid "Здравствуйте"
-msgstr "Hello"
-
 #: lietlahti/templates/template_base.mak:88
 msgid "Выйти"
 msgstr "Sign out"
-
-#: lietlahti/templates/template_base.mak:117
-msgid "Чатик"
-msgstr "Chat"
 
 #: lietlahti/templates/template_base.mak:121
 msgid "Новые комментарии"
@@ -191,34 +133,9 @@ msgstr "new comments"
 msgid "Новая публикация"
 msgstr "New article"
 
-#: lietlahti/templates/template_discuss.mak:10
-#: lietlahti/templates/template_discuss.mak:13
-msgid "Вперед"
-msgstr "Forward"
-
-#: lietlahti/templates/template_discuss.mak:11
-#: lietlahti/templates/template_discuss.mak:15
-#: lietlahti/templates/template_discuss.mak:17
-msgid "Назад"
-msgstr "Back"
-
 #: lietlahti/templates/template_discuss.mak:29
 msgid "Куку!"
 msgstr "Hi!"
-
-#: lietlahti/templates/template_discuss.mak:33
-msgid "Ссылка"
-msgstr "Link"
-
-#: lietlahti/templates/template_discuss.mak:34
-msgid "Картинка"
-msgstr "Picture"
-
-#: lietlahti/templates/template_discuss.mak:35
-#: lietlahti/templates/template_discuss.mak:60
-#: lietlahti/templates/template_newarticle.mak:248
-msgid "Загрузить"
-msgstr "Upload"
 
 #: lietlahti/templates/template_discuss.mak:45
 #: lietlahti/templates/template_newarticle.mak:233
@@ -233,29 +150,16 @@ msgstr "Keep forever"
 #: lietlahti/templates/template_main.mak:44
 #: lietlahti/templates/template_main.mak:130
 msgid "Ничего нет..."
-msgstr "Nothing to see..."
+msgstr "Nothing to see here..."
 
 #: lietlahti/templates/template_newarticle.mak:28
 #: lietlahti/templates/template_newarticle.mak:202
 msgid "Исходный код"
 msgstr "Source code"
 
-#: lietlahti/templates/template_newarticle.mak:46
-msgid "Создать"
-msgstr "Create"
-
 #: lietlahti/templates/template_newarticle.mak:62
 msgid "Публикация сохранена"
 msgstr "Article saved"
-
-#: lietlahti/templates/template_newarticle.mak:62
-msgid "Посмотреть"
-msgstr "View"
-
-#: lietlahti/templates/template_newarticle.mak:76
-#: lietlahti/templates/template_newarticle.mak:78
-msgid "Название"
-msgstr "Name"
 
 #: lietlahti/templates/template_newarticle.mak:93
 msgid "Ключевые слова"
@@ -263,11 +167,7 @@ msgstr "Keywords"
 
 #: lietlahti/templates/template_newarticle.mak:95
 msgid "новая статья, путешествия, приключения"
-msgstr "new article, voyages, adventures"
-
-#: lietlahti/templates/template_newarticle.mak:108
-msgid "Статус"
-msgstr "Status"
+msgstr "new article, travelling, adventures"
 
 #: lietlahti/templates/template_newarticle.mak:135
 msgid "Серия статей"
@@ -275,13 +175,13 @@ msgstr "Series"
 
 #: lietlahti/templates/template_newarticle.mak:172
 msgid "URL страницы"
-msgstr "Page URL"
+msgstr "page URL"
 
 #: lietlahti/templates/template_newarticle.mak:191
 #: lietlahti/templates/template_newarticle.mak:193
 #: lietlahti/templates/template_newarticle.mak:197
 msgid "Краткий текст для превью"
-msgstr "Short preview text"
+msgstr "Preview text"
 
 #: lietlahti/templates/template_newarticle.mak:201
 msgid "Визуальный редактор"
@@ -295,5 +195,5 @@ msgstr "Main text"
 
 #: lietlahti/templates/template_newarticle.mak:219
 msgid "Загрузить файл"
-msgstr "File upload"
+msgstr "Upload file"
 

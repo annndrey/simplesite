@@ -44,7 +44,8 @@ from .models import (
     Article
     )
 
-_ = TranslationStringFactory('netprofile_access')
+_ = TranslationStringFactory('lietlahti')
+
 _re_login = re.compile(r'^[\w\d._-]+$')
 article_status = {'draft':'Черновик', 'ready':'Готово', 'private':'Не трогать!'}
 
@@ -70,12 +71,21 @@ def language(req):
 
 @view_config(route_name='main', renderer='template_main.mak')
 def main_view(request):
+
 	loc = get_localizer(request)
+	print("###############")
+	locale_name = get_locale_name(request)
+	print(locale_name)
+	print(loc)
+	print(request.translate(_('трололо')))
+
 	cfg = request.registry.settings
 	lang = request.session.get('lang', 'ru')
+	print(lang)
+	print("###############")
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	articles = DBSession.query(Article).order_by(Article.pubtimestamp.desc())
-	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':loc.translate(_('Главная')), 'contacts': contacts, 'lang':lang }
+	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':request.translate(_('Главная')), 'contacts': contacts, 'lang':lang, "_":request.translate }
 	if authenticated_userid(request):
 		tpldef.update({
 				'auth':True,
@@ -96,29 +106,30 @@ def article_view(request):
 	comments = DBSession.query(Post).filter(Post.page==article_url)
 	pagename = article.getvalue("mainname", lang)
 
-	tpldef = {'article':article, 'pagename':pagename, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header, 'contacts':contacts, 'lang':lang}
+	tpldef = {'article':article, 'pagename':pagename, 'comments':comments, 'captchakey':recaptcha_key, 'articles':header, 'contacts':contacts, 'lang':lang, "_":request.translate}
 	if authenticated_userid(request):
 		tpldef.update({'auth':True, 'authuser':authenticated_userid(request)})
 	return tpldef
 
 @view_config(route_name='newarticle', renderer='template_newarticle.mak')
 def add_article(request):
+	alllang = ['ru', 'en']
 	loc = get_localizer(request)
 	if not authenticated_userid(request):
 		# add error message processing in the template
 		request.session.flash({
 				'class' : 'warning',
-				'text'  : loc.translate(_('Войдите чтобы увидеть эту страницу'))
+				'text'  : request.translate(_('Войдите чтобы увидеть эту страницу'))
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
 	if not request.POST:
 		cfg = request.registry.settings
 		contacts = Contacts(cfg.get('lietlahti.contacts', None))
 		lang = request.session.get('lang', 'ru')
-		tpldef = {}
+		tpldef = {'alllang':alllang}
 		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 		article_series = set([s.series for s in DBSession.query(Article).all()])
-		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header, 'contacts':contacts, 'lang':lang})
+		tpldef.update({'authuser':authenticated_userid(request), 'auth':True, 'article_status':article_status, 'article_series':article_series, 'pagename':'<span class="glyphicon glyphicon-pencil"></span>', 'articles':header, 'contacts':contacts, 'lang':lang, "_":request.translate})
 		return tpldef
 	else:
 		csrf = request.POST.get('csrf', '')
@@ -244,7 +255,7 @@ def discuss_view(request):
 	if not authenticated_userid(request):
 		request.session.flash({
 				'class' : 'warning',
-				'text'  : loc.translate(_('Войдите чтобы увидеть эту страницу'))
+				'text'  : request.translate(_('Войдите чтобы увидеть эту страницу'))
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
 
@@ -275,13 +286,15 @@ def discuss_view(request):
 				  'pagename':"""<span class="glyphicon glyphicon-comment"></span>""",#.join([x.name for x in users])),
 				  'newcomments':newcomments,
 				  'contacts':contacts,
-				  'lang':lang
+				  'lang':lang,
+				  "_":request.translate
 				  }
 		return tpldef
 
 @view_config(route_name='login', renderer='login.mak')
 def login_view(request):
 	loc = get_localizer(request)
+	_ = request.translate
 	login = ''
 	did_fail = False
 	cfg = request.registry.settings
@@ -309,10 +322,10 @@ def login_view(request):
 		'login'       : login,
 		'articles'    : header,
 		'failed'      : did_fail,
-		'pagename'    : loc.translate(_('Вход')),
+		'pagename'    : request.translate(_('Вход')),
 		'contacts'    : contacts,
-		'lang'        : lang
-		
+		'lang'        : lang,
+		"_"           : request.translate
 		}
 	return tpldef
 
@@ -325,7 +338,7 @@ def pub_edit(request):
 	if not authenticated_userid(request):
 		request.session.flash({
 				'class' : 'warning',
-				'text'  : loc.translate(_('Нужно войти чтобы увидеть эту страницу'))
+				'text'  : request.translate(_('Нужно войти чтобы увидеть эту страницу'))
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
 	else:
@@ -399,10 +412,11 @@ def pub_edit(request):
 					'article_series':article_series,
 					'authuser':authenticated_userid(request), 
 					'auth':True,
-					'pagename': loc.translate(_('Правка %s')) % article.getvalue("mainname", lang),
+					'pagename': "{0} {1}".format(request.translate(_('Правка')), article.getvalue("mainname", lang)),
 					'session_message':request.session.pop_flash(), 
 					'contacts':contacts,
 					'lang':lang,
+					"_":request.translate
 					}
 				tpldef.update(articleparams)
 
@@ -416,7 +430,7 @@ def pub_remove(request):
 	if not authenticated_userid(request):
 		request.session.flash({
 				'class' : 'warning',
-				'text'  : loc.translate(_('Войдите чтобы увидеть эту страницу'))
+				'text'  : request.translate(_('Войдите чтобы увидеть эту страницу'))
 				})
 		return HTTPSeeOther(location=request.route_url('login'))
 	else:

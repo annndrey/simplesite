@@ -84,18 +84,18 @@
                     <div class="container-fluid">
                         <p class="navbar-text navbar-right">
                             % if auth:
-                                ${_(Здравствуйте)}, ${authuser}! 
+                                ${_('Здравствуйте')}, ${authuser}! 
 	                        <a data-toggle="tooltip" data-placement="top" title=${_("Выйти")} href="${request.route_url('logout')}"><span class="glyphicon glyphicon-log-out"></span></a>
 	                    % else:
 	                        % if request.current_route_url() != request.route_url('login'):
-	                            <a href="${request.route_url('login')}">${_(Вход)} <span class="glyphicon glyphicon-log-in"></a>
+	                            <a href="${request.route_url('login')}">${_('Вход')} <span class="glyphicon glyphicon-log-in"></a>
 	                        % endif  
 	                    % endif
                             
 	                    <ul class="nav navbar-nav">
                                 ##
 	                    % if request.current_route_url() != request.route_url('main'):
-	                        <li><a href="${request.route_url('main')}">${_(Главная)}</a></li>
+	                        <li><a href="${request.route_url('main')}">${_('Главная')}</a></li>
 	                    % endif
                   
                             % if articles:
@@ -114,11 +114,11 @@
                   
 	                    % if auth:
 	                        % if not 'discuss' in request.current_route_url():
-		                    <li><a href="${request.route_url('home')}" title="Чатик"><span class="glyphicon glyphicon-comment"></span></a></li>
+		                    <li><a href="${request.route_url('home')}" title='${_("Чатик")}'><span class="glyphicon glyphicon-comment"></span></a></li>
 	                        % else:
 		                    ## put a link here
 		                    ##<li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></li>
-		                    <li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="${"<br>".join(["В <a href={3}>{0}</a>  {1} {3}: {2} ".format(p.article.getvalue("mainname", lang, "${_(написал)}" ), p.name, p.post, request.route_url('article', url=p.page)) for p in newcomments]) }"  data-original-title=${_("Новые комментарии")} data-placement="bottom"> ${_('новые комментарии')} <span class="badge">${str(newcomments.count())}</span></a></li>
+		                    <li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="${"<br>".join(["В <a href={3}>{0}</a>  {1} {3}: {2} ".format(p.article.getvalue("mainname", lang, "${_('написал')}" ), p.name, p.post, request.route_url('article', url=p.page)) for p in newcomments]) }"  data-original-title=${_("Новые комментарии")} data-placement="bottom"> ${_('новые комментарии')} <span class="badge">${str(newcomments.count())}</span></a></li>
 	                        % endif
 	                        % if request.current_route_url() != request.route_url('newarticle'):
 		                    <li><a href="${request.route_url('newarticle')}" title=${_("Новая публикация")}><span class="glyphicon glyphicon-pencil"></span></a></li>

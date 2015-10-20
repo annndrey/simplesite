@@ -16,8 +16,6 @@ TODO:
 ==================
 - main page: last articles, news - categories, etc
 
-- add socialbuttons - for every publications on the bottom of the page for social sharing
-
 - maybe add blur background? 
   http://www.bootply.com/91532 
   http://stackoverflow.com/questions/28010224/full-page-responsive-background-image-with-blur-effect

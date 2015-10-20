@@ -14,6 +14,7 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
+	'Babel'
     ]
 
 setup(name='lietlahti',
@@ -43,5 +44,5 @@ setup(name='lietlahti',
 			('**.py', 'python', None),
 			('**.pt', 'xml', None),
 			('**.mak', 'mako', None)
-			]}
+			]},
       )

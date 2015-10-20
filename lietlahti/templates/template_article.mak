@@ -14,13 +14,13 @@
 	    % if article:
 	        <p>
 	            % if auth:
-	                <a class="btn btn-default" href="${request.route_url('edit', pub='article', id=article.id)}">${_(Править)}</a>
-	                <a class="btn btn-default" data-toggle="modal" data-target=".modal-remove">${_(Удалить)}</a>
+	                <a class="btn btn-default" href="${request.route_url('edit', pub='article', id=article.id)}">${_('Править')}</a>
+	                <a class="btn btn-default" data-toggle="modal" data-target=".modal-remove">${_('Удалить')}</a>
 	                <div class="modal fade modal-remove" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		            <div class="modal-dialog">
 		                <div class="modal-content">
 		                    <div class="modal-header">
-		                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_(Закрыть)}</span></button>
+		                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_('Закрыть')}</span></button>
 		                        <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
 		                    </div>
 		                    <div class="modal-body">
@@ -28,8 +28,8 @@
                                         ..
 		                    </div>
 		                    <div class="modal-footer">
-		                        <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отмена)}</button>
-		                        <a href="${request.route_url('remove', pub='article', id=article.id)}" type="button" class="btn btn-primary">${_(Удалить)}</a>
+		                        <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отмена')}</button>
+		                        <a href="${request.route_url('remove', pub='article', id=article.id)}" type="button" class="btn btn-primary">${_('Удалить')}</a>
 		                    </div>
 		                </div>
 		            </div>
@@ -70,8 +70,8 @@
 		                                                <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
       		                                        </div>
       		                                        <div class="modal-footer">
-        	                                            <button type="button" class="btn btn-default" data-dismiss="modal">${_(Закрыть)}</button>
-        	                                            <button type="submit" class="btn btn-primary">${_(Сохранить)}</button>
+        	                                            <button type="button" class="btn btn-default" data-dismiss="modal">${_('Закрыть')}</button>
+        	                                            <button type="submit" class="btn btn-primary">${_('Сохранить')}</button>
 		                                            </form>
 		                                        </div>
 		                                    </div>
@@ -90,7 +90,7 @@
       		                                        <a href="${request.route_url('remove', pub='post', id=p.id)}">${_('Да, удалите немедленно')}!</a>
 		                                    </div>
 		                                    <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отменить)}</button>
+		                                        <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отменить')}</button>
 		                                    </div>
 		                                </div>
 		                            </div>
