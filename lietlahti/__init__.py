@@ -3,6 +3,7 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.config import Configurator
 from pyramid.session import UnencryptedCookieSessionFactoryConfig
 from sqlalchemy import engine_from_config
+from pyramid.i18n import TranslationStringFactory
 
 from .models import (
     DBSession,
@@ -11,6 +12,8 @@ from .models import (
 	User,
 	Article
     )
+
+_ = TranslationStringFactory('lietlahti')
 sessionfactory = UnencryptedCookieSessionFactoryConfig('t,fysdhjn')
 authn_policy = AuthTktAuthenticationPolicy( 'secret')
 authz_policy = ACLAuthorizationPolicy()
@@ -22,6 +25,7 @@ def main(global_config, **settings):
 	DBSession.configure(bind=engine)
 	Base.metadata.bind = engine
 	config = Configurator(settings=settings, session_factory=sessionfactory)
+	config.add_translation_dirs('lietlahti:locale/')
 	config.include('pyramid_mako')
 	config.set_authentication_policy(authn_policy)
 	config.set_authorization_policy(authz_policy)

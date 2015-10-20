@@ -26,9 +26,9 @@ setup(name='lietlahti',
         "Topic :: Internet :: WWW/HTTP",
         "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
         ],
-      author='',
-      author_email='',
-      url='',
+      author='Andrew Gontchar',
+      author_email='gontchar@gmail.com',
+      url='https://github.com/annndrey/lietlahti',
       keywords='web wsgi bfg pylons pyramid',
       packages=find_packages(),
       include_package_data=True,
@@ -39,4 +39,9 @@ setup(name='lietlahti',
       [paste.app_factory]
       main = lietlahti:main
       """,
+	  message_extractors={'.' : [
+			('**.py', 'python', None),
+			('**.pt', 'xml', None),
+			('**.mak', 'mako', None)
+			]}
       )

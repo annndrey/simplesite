@@ -25,7 +25,7 @@
 
 <script type="text/javascript">
  function changeposttype(){
-     if($("#posttype option:selected").text() == 'Исходный код'){
+     if($("#posttype option:selected").text() == ${_('Исходный код')}){
          //tinymce.execCommand('mceToggleEditor',true,'new-post-desc');
          tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'inputArticle_ru');
          tinymce.EditorManager.execCommand('mceRemoveEditor',true, 'inputArticle_en');
@@ -43,7 +43,7 @@
          allowClear:true,
          formatNoMatches: function(term) {
              /* customize the no matches output */
-             return "<input class='form-control' id='newTerm' value='"+term+"'><a href='#' id='addNew' class='btn btn-default'>Создать</a>"
+             return "<input class='form-control' id='newTerm' value='"+term+"'><a href='#' id='addNew' class='btn btn-default'>${_(Создать)}</a>"
          }
      })
                       .parent().find('.select2-with-searchbox').on('click','#addNew',function(){
@@ -59,7 +59,7 @@
 
 <div class="inner"> 
     % if session_message and session_message[0]=='edited':
-	<div class="alert alert-success" role="alert">Публикация сохранена! <a href="${request.route_url('article', url=article.url)}">Посмотреть</a></div>
+	<div class="alert alert-success" role="alert">${_('Публикация сохранена')}! <a href="${request.route_url('article', url=article.url)}">${_(Посмотреть)}</a></div>
     % endif
     <div class="col-md-offset-1">
         % if not edit:
@@ -73,9 +73,9 @@
 	        <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" align='justify'>
 	            <div class="form-group">
                         
-                        <label for="${"inputMainname_"+lng}" class="col-md-2 control-label">Название (${lng})</label>
+                        <label for="${"inputMainname_"+lng}" class="col-md-2 control-label">${_(Название)} (${lng})</label>
 	                <div class="col-md-5">
-	                    <input type="text" class="form-control" id=${"inputMainname_"+lng} name=${"inputMainname_"+lng} placeholder="Название (${lng})" 
+	                    <input type="text" class="form-control" id=${"inputMainname_"+lng} name=${"inputMainname_"+lng} placeholder="${_(Название)} (${lng})" 
 		                   % if edit:
 		                   value="${article.getvalue("mainname", lng)}"
 		                   % endif
@@ -90,9 +90,9 @@
         <div class="row">
 	    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" align='justify'>
 	        <div class="form-group">
-	            <label for="inputKeywords" class="col-md-2 control-label">Ключевые слова</label>
+	            <label for="inputKeywords" class="col-md-2 control-label">${_('Ключевые слова')}</label>
 	            <div class="col-md-10">
-	                <input type="text" class="form-control" id="inputKeywords" name="inputKeywords" placeholder="новая статья, путешествия, приключения"
+	                <input type="text" class="form-control" id="inputKeywords" name="inputKeywords" placeholder="${_('новая статья, путешествия, приключения')}"
 		               % if edit:
 		               value="${article.keywords}"
 		               % endif
@@ -105,7 +105,7 @@
         <div class="row">
 	    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" align='justify'>
 	        <div class="form-group">
-                    <label for="inputStatus" class="col-md-2 control-label">Статус</label>
+                    <label for="inputStatus" class="col-md-2 control-label">${_(Статус)}</label>
                     <div class="col-md-10">
 		        <select class="form-control" id="inputStatus" name="inputStatus">
 		            % for s in article_status.keys():
@@ -132,7 +132,7 @@
         <div class="row">
 	    <div class="col-md-10 col-md-offset-1 col-sm-10 col-sm-offset-1" align='justify'>
 	        <div class="form-group">
-	            <label for="inputSeries" class="col-md-2 control-label">Серия статей</label>
+	            <label for="inputSeries" class="col-md-2 control-label">${_('Серия статей')}</label>
 	            <div class="col-md-10">
 	                <select class="form-control" id="inputSeries" name="inputSeries">
 		            % if article_series is not None:
@@ -169,7 +169,7 @@
 	        ##</div>
 	        
 	        <div class="form-group">
-	            <label for="inputURL" class="col-md-2 control-label">URL страницы</label>
+	            <label for="inputURL" class="col-md-2 control-label">${_('URL страницы')}</label>
 	            <div class="col-md-10">
 	                <input type="text" class="form-control" id="inputURL" name="inputURL" placeholder="yourarticleurl"
 		               % if edit:
@@ -188,37 +188,37 @@
                     % for lng in alllang:
 	                % if edit:
 	                    % if article.getvalue("previewtext", lng) is not None:
-		                <textarea class="form-control" id=${"inputPrevText_"+lng} name=${"inputPrevText_"+lng} placeholder="Краткий текст для превью (${lng})" rows=3>${article.getvalue("previewtext", lng)|n}</textarea>
+		                <textarea class="form-control" id=${"inputPrevText_"+lng} name=${"inputPrevText_"+lng} placeholder="${_('Краткий текст для превью')} (${lng})" rows=3>${article.getvalue("previewtext", lng)|n}</textarea>
 	                    % else:
-		                <textarea class="form-control" id=${"inputPrevText_"+lng} name=${"inputPrevText_"+lng} placeholder="Краткий текст для превью (${lng})" rows=3></textarea>
+		                <textarea class="form-control" id=${"inputPrevText_"+lng} name=${"inputPrevText_"+lng} placeholder="${_('Краткий текст для превью')} (${lng})" rows=3></textarea>
 	                    % endif
                             
 	                % else:
-	                    <textarea class="form-control" id=${"inputPrevText_"+lng} name=${"inputPrevText_"+lng} placeholder="Краткий текст для превью (${lng})" rows=3></textarea>
+	                    <textarea class="form-control" id=${"inputPrevText_"+lng} name=${"inputPrevText_"+lng} placeholder="${_('Краткий текст для превью')} (${lng})" rows=3></textarea>
 	                % endif
                     % endfor	                    
                     <select id="posttype" class="form-control" onchange="changeposttype()">
-                        <option>Визуальный редактор</option>
-                        <option>Исходный код</option>
+                        <option>${_('Визуальный редактор')}</option>
+                        <option>${_('Исходный код')}</option>
                     </select>
                     % for lng in alllang:
 	                % if edit:
                             % if article.getvalue("maintext", lng) is not None: 
-     	                        <textarea class="form-control" id=${"inputArticle_"+lng} name=${"inputArticle_"+lng} placeholder="Основной текст (${lng})" rows=20>${article.getvalue("maintext", lng)|n}</textarea>
+     	                        <textarea class="form-control" id=${"inputArticle_"+lng} name=${"inputArticle_"+lng} placeholder="${_('Основной текст')} (${lng})" rows=20>${article.getvalue("maintext", lng)|n}</textarea>
                                 <br><br>
                             % else:
-                                <textarea class="form-control" id=${"inputArticle_"+lng} name=${"inputArticle_"+lng} placeholder="Основной текст (${lng})" rows=20>Основной текст (${lng})</textarea>
+                                <textarea class="form-control" id=${"inputArticle_"+lng} name=${"inputArticle_"+lng} placeholder="${_('Основной текст')} (${lng})" rows=20>${_('Основной текст')} (${lng})</textarea>
                                 <br><br>
                             % endif
 	                % else:
-	                    <textarea class="form-control" id=${"inputArticle_"+lng} name=${"inputArticle_"+lng} placeholder="Основной текст (${lng})" rows=20>Основной текст (${lng})</textarea>
+	                    <textarea class="form-control" id=${"inputArticle_"+lng} name=${"inputArticle_"+lng} placeholder="${_('Основной текст')} (${lng})" rows=20>${_('Основной текст')} (${lng})</textarea>
                             <br><br>
 	                % endif
 	            % endfor
 	            <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
-                    <a data-toggle="modal" data-target="#uploadModal" class="btn btn-default pull-right">Загрузить файл</a>
-	            <a href="${req.referrer}" type="button" class="btn btn-default pull-right">Отменить</a>
-	            <button type="submit" class="btn btn-default pull-right" id="submit" name="submit" title="Опубликовать" tabindex="3">Сохранить</button>
+                    <a data-toggle="modal" data-target="#uploadModal" class="btn btn-default pull-right">${_('Загрузить файл')}</a>
+	            <a href="${req.referrer}" type="button" class="btn btn-default pull-right">${_(Отменить)}</a>
+	            <button type="submit" class="btn btn-default pull-right" id="submit" name="submit" title="${_(Сохранить)}" tabindex="3">${_(Сохранить)}</button>
 	        </div>
 	    </div>
         </div>
@@ -230,7 +230,7 @@
     	            <div class="modal-content">
       	                <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="uploadModal">Загрузить что-нибудь</h4>
+                            <h4 class="modal-title" id="uploadModal">${_('Загрузить что-нибудь')}</h4>
       	                </div>
       	                <div class="modal-body">
                             <form class="form-inline" enctype="multipart/form-data" id="fileupload" name="fileupload" role="form" method="post" action="#">
@@ -238,14 +238,14 @@
 		                    <input type="file" name="file" size=60>
 		                </div>
 		                <div class="form-group">
-		                    <input type='checkbox' name='preserve' value='preserve'>Сохранить навсегда!!
+		                    <input type='checkbox' name='preserve' value='preserve'>${_('Сохранить навсегда')}!!
 		                </div>
 		                <div class="form-group">
 		                    <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 		                </div>
       		                <div class="modal-footer">
-		                    <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-		                    <button type="submit" class="btn btn-primary">Загрузить</button>
+		                    <button type="button" class="btn btn-default" data-dismiss="modal">${_(Закрыть)}</button>
+		                    <button type="submit" class="btn btn-primary">${_(Загрузить)}</button>
 		                </div>
 	                    </form>
 	                </div>
@@ -254,8 +254,8 @@
             </div>
     </div>  
     
-
-    </div>
+    
+</div>
 </div>
 
 

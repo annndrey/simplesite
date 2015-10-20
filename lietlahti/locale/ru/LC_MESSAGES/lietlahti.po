@@ -1,0 +1,196 @@
+# Russian translations for lietlahti.
+# Copyright (C) 2015 ORGANIZATION
+# This file is distributed under the same license as the lietlahti project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: lietlahti 0.0\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2015-10-20 12:35+0300\n"
+"PO-Revision-Date: 2015-10-20 12:36+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.1.1\n"
+
+#: lietlahti/views.py:78
+msgid "Главная"
+msgstr ""
+
+#: lietlahti/views.py:111 lietlahti/views.py:247 lietlahti/views.py:419
+msgid "Войдите чтобы увидеть эту страницу"
+msgstr ""
+
+#: lietlahti/views.py:312
+msgid "Вход"
+msgstr ""
+
+#: lietlahti/views.py:328
+msgid "Нужно войти чтобы увидеть эту страницу"
+msgstr ""
+
+#: lietlahti/views.py:402
+#, python-format
+msgid "Правка %s"
+msgstr ""
+
+#: lietlahti/templates/login.mak:18
+msgid "имя"
+msgstr ""
+
+#: lietlahti/templates/login.mak:18
+msgid "Введите имя пользователя"
+msgstr ""
+
+#: lietlahti/templates/login.mak:19
+msgid "пароль"
+msgstr ""
+
+#: lietlahti/templates/login.mak:19
+msgid "Введите пароль"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:8
+#: lietlahti/templates/template_article.mak:9
+#: lietlahti/templates/template_article.mak:10
+#: lietlahti/templates/template_article.mak:11
+#: lietlahti/templates/template_base.mak:10
+msgid "Лиетлахти, природно-этнографический парк"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:24
+#: lietlahti/templates/template_main.mak:29
+#: lietlahti/templates/template_main.mak:65
+#: lietlahti/templates/template_main.mak:105
+msgid "Удаление статьи"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:27
+#: lietlahti/templates/template_main.mak:32
+#: lietlahti/templates/template_main.mak:68
+#: lietlahti/templates/template_main.mak:108
+msgid "Вы действительно хотите удалить статью"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:42
+msgid "Ничего нет"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:45
+msgid "Такой публикации нет"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:65
+#: lietlahti/templates/template_discuss.mak:84
+msgid "Правка записи"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:87
+#: lietlahti/templates/template_discuss.mak:106
+msgid "Удаление записи"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:90
+#: lietlahti/templates/template_discuss.mak:109
+msgid "Да, удалите немедленно"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:117
+msgid "Представьтесь пожалуйста"
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:120
+msgid "Оставьте комментарий..."
+msgstr ""
+
+#: lietlahti/templates/template_article.mak:129
+#: lietlahti/templates/template_discuss.mak:32
+msgid "Послать"
+msgstr ""
+
+#: lietlahti/templates/template_base.mak:88
+msgid "Выйти"
+msgstr ""
+
+#: lietlahti/templates/template_base.mak:121
+msgid "Новые комментарии"
+msgstr ""
+
+#: lietlahti/templates/template_base.mak:121
+msgid "новые комментарии"
+msgstr ""
+
+#: lietlahti/templates/template_base.mak:124
+msgid "Новая публикация"
+msgstr ""
+
+#: lietlahti/templates/template_discuss.mak:29
+msgid "Куку!"
+msgstr ""
+
+#: lietlahti/templates/template_discuss.mak:45
+#: lietlahti/templates/template_newarticle.mak:233
+msgid "Загрузить что-нибудь"
+msgstr ""
+
+#: lietlahti/templates/template_discuss.mak:53
+#: lietlahti/templates/template_newarticle.mak:241
+msgid "Сохранить навсегда"
+msgstr ""
+
+#: lietlahti/templates/template_main.mak:44
+#: lietlahti/templates/template_main.mak:130
+msgid "Ничего нет..."
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:28
+#: lietlahti/templates/template_newarticle.mak:202
+msgid "Исходный код"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:62
+msgid "Публикация сохранена"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:93
+msgid "Ключевые слова"
+v1;3202;0cmsgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:95
+msgid "новая статья, путешествия, приключения"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:135
+msgid "Серия статей"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:172
+msgid "URL страницы"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:191
+#: lietlahti/templates/template_newarticle.mak:193
+#: lietlahti/templates/template_newarticle.mak:197
+msgid "Краткий текст для превью"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:201
+msgid "Визуальный редактор"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:207
+#: lietlahti/templates/template_newarticle.mak:210
+#: lietlahti/templates/template_newarticle.mak:214
+msgid "Основной текст"
+msgstr ""
+
+#: lietlahti/templates/template_newarticle.mak:219
+msgid "Загрузить файл"
+msgstr ""
+

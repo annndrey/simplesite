@@ -18,22 +18,22 @@
 		  ##</a>
 		  <div class="media-body">
 		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
-		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
-		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
+		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">${_(Править)}</a>
+		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">${_(Удалить)}</a>
 	            </small></h4>
 		    <div class="modal fade modal-remove${a.id}" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		      <div class="modal-dialog">
 		        <div class="modal-content">
 			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			    <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
+			    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_(Закрыть)}</span></button>
+			    <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
 			  </div>
 			  <div class="modal-body">
-			    Вы действительно хотите удалить статью <strong>"${a.getvalue("mainname", lang)}"</strong>?
+			    ${_('Вы действительно хотите удалить статью')} <strong>"${a.getvalue("mainname", lang)}"</strong>?
 			  </div>
 			  <div class="modal-footer">
-			    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-			    <a href="${request.route_url('remove', pub='article', id=a.id)}" type="button" class="btn btn-primary">Удалить</a>
+			    <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отмена)}</button>
+			    <a href="${request.route_url('remove', pub='article', id=a.id)}" type="button" class="btn btn-primary">${_(Удалить)}</a>
 			  </div>
 		        </div>
 		      </div>
@@ -41,7 +41,7 @@
 		    % if a.getvalue("previewtext", lang) is not None:
 		      <small>${a.getvalue("previewtext", lang)}</small>
 		    % else:
-		      ...
+		      ${_('Ничего нет...')}
 		    % endif
 		  </div>
 	        </div>
@@ -54,22 +54,22 @@
 		  ##</a>
 		  <div class="media-body">
 		    <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a> <small><span class="label label-default"> ${statuses[a.status]}</span> [by ${a.user}]
-		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
-		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
+		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">${_(Править)}</a>
+		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">${_(Удалить)}</a>
 		    </small></h4>
 		    <div class="modal fade modal-remove${a.id}" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		      <div class="modal-dialog">
 		        <div class="modal-content">
 			  <div class="modal-header">
 			    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			    <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
+			    <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
 			  </div>
 			  <div class="modal-body">
-			    Вы действительно хотите удалить статью <strong>"${a.getvalue("mainname", lang)}"</strong>?
+			    ${_('Вы действительно хотите удалить статью')} <strong>"${a.getvalue("mainname", lang)}"</strong>?
 			  </div>
 			  <div class="modal-footer">
-			    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-			    <a href="${request.route_url('remove', pub='article', id=a.id)}" type="button" class="btn btn-primary">Удалить</a>
+			    <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отмена)}</button>
+			    <a href="${request.route_url('remove', pub='article', id=a.id)}" type="button" class="btn btn-primary">${_(Удалить)}</a>
 			  </div>
 		        </div>
 		      </div>
@@ -94,22 +94,22 @@
 		  <h4 class="media-heading"><a href="${request.route_url('article', url=a.url)}">${a.getvalue("mainname", lang)}</a>
 		  % if auth:
                     <small>
-		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">Править</a>
-		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">Удалить</a>
+		    <a class="btn btn-default btn-xs" href="${request.route_url('edit', pub='article', id=a.id)}">${_(Править)}</a>
+		    <a class="btn btn-default btn-xs" data-toggle="modal" data-target=".modal-remove${a.id}">${_(Удалить)}</a>
 		    </small></h4>
 		    <div class="modal fade modal-remove${a.id}" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		      <div class="modal-dialog">
 		        <div class="modal-content">
 			  <div class="modal-header">
-			    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-			    <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
+			    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_(Закрыть)}</span></button>
+			    <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
 			  </div>
 			  <div class="modal-body">
-			    Вы действительно хотите удалить статью <strong>"${a.getvalue("mainname", lang)}"</strong>?
+			    ${_('Вы действительно хотите удалить статью')} <strong>"${a.getvalue("mainname", lang)}"</strong>?
 			  </div>
 			  <div class="modal-footer">
-			    <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-			    <a href="${request.route_url('remove', pub='article', id=a.id)}" type="button" class="btn btn-primary">Удалить</a>
+			    <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отмена)}</button>
+			    <a href="${request.route_url('remove', pub='article', id=a.id)}" type="button" class="btn btn-primary">${_(Удалить)}</a>
 			  </div>
 		        </div>
 		      </div>
@@ -127,7 +127,7 @@
 	  % endif
 	% endfor  
       % else:
-	There's no articles yet. 
+	${_('Ничего нет...')}
       % endif  	
     </div>
   </div>

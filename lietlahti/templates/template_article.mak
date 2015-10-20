@@ -5,31 +5,31 @@
 <div class="inner">
     <div class="row">
         <div class="social-likes pull-letf">
-            <div class="facebook" title="Share link on Facebook" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
-            <div class="twitter" title="Share link on Twitter" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
-            <div class="plusone" title="Share link on Google+" data-title="Лиетлахти, природно-этнографический парк">&nbsp</div>
-            <div class="pinterest" title="Share image on Pinterest" data-media="Лиетлахти, природно-этнографический парк" data-title="">&nbsp</div>
+            <div class="facebook" title="Share link on Facebook" data-title="${_('Лиетлахти, природно-этнографический парк')}">&nbsp</div>
+            <div class="twitter" title="Share link on Twitter" data-title="${_('Лиетлахти, природно-этнографический парк')}">&nbsp</div>
+            <div class="plusone" title="Share link on Google+" data-title="${_('Лиетлахти, природно-этнографический парк')}">&nbsp</div>
+            <div class="pinterest" title="Share image on Pinterest" data-media="${_('Лиетлахти, природно-этнографический парк')}" data-title="">&nbsp</div>
         </div>
         <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2" align='justify'>
 	    % if article:
 	        <p>
 	            % if auth:
-	                <a class="btn btn-default" href="${request.route_url('edit', pub='article', id=article.id)}">Править</a>
-	                <a class="btn btn-default" data-toggle="modal" data-target=".modal-remove">Удалить</a>
+	                <a class="btn btn-default" href="${request.route_url('edit', pub='article', id=article.id)}">${_(Править)}</a>
+	                <a class="btn btn-default" data-toggle="modal" data-target=".modal-remove">${_(Удалить)}</a>
 	                <div class="modal fade modal-remove" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
 		            <div class="modal-dialog">
 		                <div class="modal-content">
 		                    <div class="modal-header">
-		                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-		                        <h4 class="modal-title" id="modalRemoveLabel">Удаление статьи</h4>
+		                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_(Закрыть)}</span></button>
+		                        <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
 		                    </div>
 		                    <div class="modal-body">
-		                        Вы действительно хотите удалить статью <strong>"${article.getvalue("mainname", lang)}"</strong>?
+		                        ${_('Вы действительно хотите удалить статью')} <strong>"${article.getvalue("mainname", lang)}"</strong>?
                                         ..
 		                    </div>
 		                    <div class="modal-footer">
-		                        <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-		                        <a href="${request.route_url('remove', pub='article', id=article.id)}" type="button" class="btn btn-primary">Удалить</a>
+		                        <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отмена)}</button>
+		                        <a href="${request.route_url('remove', pub='article', id=article.id)}" type="button" class="btn btn-primary">${_(Удалить)}</a>
 		                    </div>
 		                </div>
 		            </div>
@@ -39,10 +39,10 @@
                 % if article.getvalue("maintext", lang) is not None:
                     ${article.getvalue("maintext", lang)|n}
                 % else:
-                    Nothing to see here :(
+                    ${_('Ничего нет')} :(
                 % endif
 	    % else:
-	        There's no such article
+	        ${_('Такой публикации нет')}
 	    % endif  	
 	    
 	    % if comments is not None and len(comments.all()) > 0:
@@ -62,7 +62,7 @@
     		                                    <div class="modal-content">
       		                                        <div class="modal-header">
         	                                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        	                                            <h4 class="modal-title" id="editModalLabel${p.id}">Правка записи</h4>
+        	                                            <h4 class="modal-title" id="editModalLabel${p.id}">${_('Правка записи')}</h4>
       		                                        </div>
       		                                        <div class="modal-body">
         	                                            <form role="form" method="post" action="${request.route_url('edit', pub='post', id=p.id)}">
@@ -70,8 +70,8 @@
 		                                                <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
       		                                        </div>
       		                                        <div class="modal-footer">
-        	                                            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
-        	                                            <button type="submit" class="btn btn-primary">Сохранить</button>
+        	                                            <button type="button" class="btn btn-default" data-dismiss="modal">${_(Закрыть)}</button>
+        	                                            <button type="submit" class="btn btn-primary">${_(Сохранить)}</button>
 		                                            </form>
 		                                        </div>
 		                                    </div>
@@ -84,13 +84,13 @@
 		                                <div class="modal-content">
 		                                    <div class="modal-header">
 		                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		                                        <h4 class="modal-title" id="deleteModalLabel${p.id}">Удаление записи</h4>
+		                                        <h4 class="modal-title" id="deleteModalLabel${p.id}">${_('Удаление записи')}</h4>
 		                                    </div>
 		                                    <div class="modal-body">
-      		                                        <a href="${request.route_url('remove', pub='post', id=p.id)}">Да, удалите немедленно!</a>
+      		                                        <a href="${request.route_url('remove', pub='post', id=p.id)}">${_('Да, удалите немедленно')}!</a>
 		                                    </div>
 		                                    <div class="modal-footer">
-		                                        <button type="button" class="btn btn-default" data-dismiss="modal">Отменить</button>
+		                                        <button type="button" class="btn btn-default" data-dismiss="modal">${_(Отменить)}</button>
 		                                    </div>
 		                                </div>
 		                            </div>
@@ -114,10 +114,10 @@
 	            ##<div class="form-group">
      	            ##<div class="col-md-9 col-md-offset-2 col-sm-9 col-sm-offset-2">
 	            % if not auth:
-	                <input type="text" class="form-control" id="username" name="username" placeholder="Представьтесь пожалуйста">
+	                <input type="text" class="form-control" id="username" name="username" placeholder=${_("Представьтесь пожалуйста")}>
 	            % endif
                     
-     	            <textarea class="form-control" id="userpost" name="userpost" placeholder="Оставьте комментарий..." rows=2></textarea>
+     	            <textarea class="form-control" id="userpost" name="userpost" placeholder=${_("Оставьте комментарий...")} rows=2></textarea>
 	            <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 	            <input type="hidden" id="ppage" name="ppage" value="${article.url}" />
 	            <input type="hidden" id="aid" name="aid" value="${article.id}" />
@@ -126,7 +126,7 @@
 	                <div class="g-recaptcha" data-sitekey="${captchakey}" data-theme="dark"></div>
 	            % endif
                     
-	            <button style="margin: 10px 0; margin-left: 2px;" type="submit" class="btn btn-default pull-right" id="submit" name="submit" title="Послать" tabindex="3">Послать</button>
+	            <button style="margin: 10px 0; margin-left: 2px;" type="submit" class="btn btn-default pull-right" id="submit" name="submit" title=${_("Послать")} tabindex="3">Послать</button>
      	            ##</div>
 	            ##</div>
             </div>		
