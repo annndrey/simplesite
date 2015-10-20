@@ -114,10 +114,10 @@
 	            ##<div class="form-group">
      	            ##<div class="col-md-9 col-md-offset-2 col-sm-9 col-sm-offset-2">
 	            % if not auth:
-	                <input type="text" class="form-control" id="username" name="username" placeholder=${_("Представьтесь пожалуйста")}>
+	                <input type="text" class="form-control" id="username" name="username" placeholder="${_("Представьтесь пожалуйста")}">
 	            % endif
                     
-     	            <textarea class="form-control" id="userpost" name="userpost" placeholder=${_("Оставьте комментарий...")} rows=2></textarea>
+     	            <textarea class="form-control" id="userpost" name="userpost" placeholder="${_("Оставьте комментарий...")}" rows=2></textarea>
 	            <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 	            <input type="hidden" id="ppage" name="ppage" value="${article.url}" />
 	            <input type="hidden" id="aid" name="aid" value="${article.id}" />

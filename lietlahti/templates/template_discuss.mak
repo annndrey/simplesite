@@ -26,10 +26,10 @@
       <form role="form" method="post" action="${req.route_url('newpost')}">
 	<div class="form-group">
      	  <div class="col-md-8 col-md-offset-2 col-sm-8 col-sm-offset-2">
-     	    <textarea class="form-control" id="userpost" name="userpost" placeholder=${_("Куку!")} rows=2></textarea>
+     	    <textarea class="form-control" id="userpost" name="userpost" placeholder="${_("Куку!")}" rows=2></textarea>
 	    <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
 	    <input type="hidden" id="ppage" name="ppage" value="discuss" />
-	    <button style="margin: 10px 0; margin-left: 2px;" type="submit" class="btn btn-default pull-right" id="submit" name="submit" title=${_("Послать")} tabindex="3">${_('Послать')}</button>
+	    <button style="margin: 10px 0; margin-left: 2px;" type="submit" class="btn btn-default pull-right" id="submit" name="submit" title="${_("Послать")}" tabindex="3">${_('Послать')}</button>
 	    <a style="margin: 10px 0; margin-left: 2px;" href="javascript:void(0);" class="btn btn-default pull-right" onclick="injectText('userpost','link');" >${_('Ссылка')}</a> 
 	    <a style="margin: 10px 0; margin-left: 2px;" href="javascript:void(0);" class="btn btn-default pull-right" onclick="injectText('userpost','pict');" >${_('Картинка')}</a>
 	    <a style="margin: 10px 0; margin-left: 2px;" data-toggle="modal" data-target="#uploadModal" class="btn btn-default pull-right">${_('Загрузить')}</a>

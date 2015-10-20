@@ -12,8 +12,8 @@
 	            </div>
 	        % endfor
 	        <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
-	        <input type="text" class="form-control" placeholder="${_('имя')}" required="required" autofocus="autofocus" id="user" name="user" title=${_("Введите имя пользователя")} value="" maxlength="254" tabindex="1" autocomplete="off" />
-	        <input type="password" class="form-control" placeholder="${_('пароль')}" required="required" id="pass" name="pass" title=${_("Введите пароль")} value="" maxlength="254" tabindex="2" autocomplete="off" />
+	        <input type="text" class="form-control" placeholder="${_('имя')}" required="required" autofocus="autofocus" id="user" name="user" title="${_("Введите имя пользователя")}" value="" maxlength="254" tabindex="1" autocomplete="off" />
+	        <input type="password" class="form-control" placeholder="${_('пароль')}" required="required" id="pass" name="pass" title="${_("Введите пароль")}" value="" maxlength="254" tabindex="2" autocomplete="off" />
 	        <button type="submit" class="btn btn-lg btn-primary btn-block" id="submit" name="submit" title="${_("Войти")}" tabindex="3">${_('Войти')}</button>
 	    </form>	
         </div>

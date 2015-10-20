@@ -118,10 +118,10 @@
 	                        % else:
 		                    ## put a link here
 		                    ##<li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="Popover title" data-content="And here's some amazing content. It's very engaging. Right?"></a></li>
-		                    <li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="${"<br>".join(["В <a href={3}>{0}</a>  {1} {3}: {2} ".format(p.article.getvalue("mainname", lang, "${_('написал')}" ), p.name, p.post, request.route_url('article', url=p.page)) for p in newcomments]) }"  data-original-title=${_("Новые комментарии")} data-placement="bottom"> ${_('новые комментарии')} <span class="badge">${str(newcomments.count())}</span></a></li>
+		                    <li><a href="#" role="button" class="btn popovers" data-toggle="popover" title="" data-content="${"<br>".join(["В <a href={3}>{0}</a>  {1} {3}: {2} ".format(p.article.getvalue("mainname", lang, "${_('написал')}" ), p.name, p.post, request.route_url('article', url=p.page)) for p in newcomments]) }"  data-original-title="${_("Новые комментарии")}" data-placement="bottom"> ${_('новые комментарии')} <span class="badge">${str(newcomments.count())}</span></a></li>
 	                        % endif
 	                        % if request.current_route_url() != request.route_url('newarticle'):
-		                    <li><a href="${request.route_url('newarticle')}" title=${_("Новая публикация")}><span class="glyphicon glyphicon-pencil"></span></a></li>
+		                    <li><a href="${request.route_url('newarticle')}" title="${_("Новая публикация")}"><span class="glyphicon glyphicon-pencil"></span></a></li>
 	                        % endif
 	                    % endif
                             <li>
