@@ -53,7 +53,7 @@
 	            <div class="row">
 	                <div class="panel panel-default">
 		            <div class="panel-heading">
-     		                <h4>${p.name}: <small>${p.date.strftime('%d/%m/%Y %H:%M')}</small>
+     		                <h4>${p.name}: <small>${p.date.strftime('%d/%m/%Y %H:%M')}</small><a name="${p.id}">
 		                    % if auth:
 		                        % if p.name == authuser:
 		                            <a data-toggle="modal" data-target="#editModal${p.id}"><span class="glyphicon glyphicon-pencil"></span></a>

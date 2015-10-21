@@ -73,16 +73,9 @@ def language(req):
 def main_view(request):
 
 	loc = get_localizer(request)
-	print("###############")
 	locale_name = get_locale_name(request)
-	print(locale_name)
-	print(loc)
-	print(request.translate(_('трололо')))
-
 	cfg = request.registry.settings
 	lang = request.session.get('lang', 'ru')
-	print(lang)
-	print("###############")
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	articles = DBSession.query(Article).order_by(Article.pubtimestamp.desc())
 	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':request.translate(_('Главная')), 'contacts': contacts, 'lang':lang, "_":request.translate }
@@ -225,6 +218,7 @@ def add_new_post(request):
 			if message and csrf == request.session.get_csrf_token() and ppage:
 				newpost = Post(date = datetime.datetime.now(), page=ppage, name=username, ip=request.remote_addr, post=message, articleid=aid )
 				DBSession.add(newpost)
+				transaction.commit()
 		
 
 		else:
@@ -236,6 +230,7 @@ def add_new_post(request):
 				if message and csrf == request.session.get_csrf_token() and ppage:
 					newpost = Post(date = datetime.datetime.now(), page=ppage, name=username, ip=request.remote_addr, post=message, articleid=aid )
 					DBSession.add(newpost)
+					transaction.commit()
 					
 		return HTTPSeeOther(location=request.referrer)
 
@@ -300,7 +295,7 @@ def login_view(request):
 	cfg = request.registry.settings
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	lang = request.session.get('lang', 'ru')
-	nxt = request.route_url('home')
+	nxt = request.route_url('main')
 	if authenticated_userid(request):
 		return HTTPSeeOther(location=nxt)
 	if 'submit' in request.POST:
@@ -315,7 +310,7 @@ def login_view(request):
 				if user.password == passwd:
 					headers = remember(request, login)
 					request.response.headerlist.extend(headers)
-					return HTTPFound(request.route_url('home'), headers=headers)
+					return HTTPFound(request.route_url('main'), headers=headers)
 		did_fail = True
 	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
 	tpldef = {
@@ -441,14 +436,17 @@ def pub_remove(request):
 			if post.page == 'discuss':
 				if post.name == authenticated_userid(request):
 					DBSession.delete(post)
+					transaction.commit()
 					return HTTPSeeOther(location=request.referrer)
 			else:
 				DBSession.delete(post)
+				transaction.commit()
 				return HTTPSeeOther(location=request.referrer)
 		elif pubtype == 'article':
 			article = DBSession.query(Article).filter(Article.id==pubid).first()
 			#if article.user == authenticated_userid(request):
 			DBSession.delete(article)
+			transaction.commit()
 				#session.flash article deleted
 			return HTTPSeeOther(location=request.route_url('main'))
 
