@@ -6,7 +6,7 @@ from sqlalchemy import (
 	Enum,
 	ForeignKey
     )
-from sqlalchemy.dialects.mysql import DATETIME, TIMESTAMP, LONGTEXT, DATE, NUMERIC
+from sqlalchemy.dialects.mysql import DATETIME, TIMESTAMP, LONGTEXT, DATE, NUMERIC, TINYINT
 
 from sqlalchemy.ext.declarative import declarative_base
 
@@ -47,6 +47,7 @@ class Post(Base):
 class Article(Base):
 	__tablename__ = 'articles'
 	id = Column(Integer, primary_key=True)
+	ordr = Column(Integer)
 	mainname_ru = Column(Unicode, unique=True)
 	mainname_en = Column(Unicode, unique=True)
 	upname = Column(Unicode, unique=True)
@@ -75,8 +76,8 @@ class Article(Base):
 		default='draft',
 		)
 
-	def __init__(self, upname, keywords, url, descr, pubtimestamp, user, sep_url, right_bracket_url, left_bracket_url, previewpict, series, status, mainname_ru=None, mainname_en=None, maintext_ru=None, maintext_en=None, previewtext_ru=None, previewtext_en=None):
-		#localization
+	def __init__(self, keywords, url, descr, pubtimestamp, user, sep_url, right_bracket_url, left_bracket_url, previewpict, series, status, mainname_ru=None, mainname_en=None, maintext_ru=None, maintext_en=None, previewtext_ru=None, previewtext_en=None):
+
 		if mainname_ru is not None:
 			self.mainname_ru = mainname_ru
 		if mainname_en is not None:
@@ -90,7 +91,7 @@ class Article(Base):
 		if previewtext_en is not None:
 			self.previewtext_en = previewtext_en
 
-		self.upname = upname
+		self.upname = None
 		self.keywords = keywords
 		self.url = url
 		self.descr = descr
@@ -115,10 +116,11 @@ class Article(Base):
 class User(Base):
 	__tablename__ = 'users'
 	id = Column(Integer, primary_key=True)
-	name = Column(Unicode)
+	name = Column(Unicode(200), unique=True)
 	password = Column(Unicode)
 	email = Column(Unicode(150))
 	bday = Column(DATE)
+	admin = Column(TINYINT(1), nullable=False, default=0)
 
 	def __init__(self, name, password):
 		self.name = name

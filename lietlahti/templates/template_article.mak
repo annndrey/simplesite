@@ -1,7 +1,6 @@
 ## -*- coding: utf-8 -*-
 
 <%inherit file="lietlahti:templates/template_base.mak"/>
-
 <div class="inner">
     <div class="row">
         <div class="social-likes pull-letf">
@@ -14,26 +13,28 @@
 	    % if article:
 	        <p>
 	            % if auth:
-	                <a class="btn btn-default" href="${request.route_url('edit', pub='article', id=article.id)}">${_('Править')}</a>
-	                <a class="btn btn-default" data-toggle="modal" data-target=".modal-remove">${_('Удалить')}</a>
-	                <div class="modal fade modal-remove" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
-		            <div class="modal-dialog">
-		                <div class="modal-content">
-		                    <div class="modal-header">
-		                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_('Закрыть')}</span></button>
-		                        <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
-		                    </div>
-		                    <div class="modal-body">
-		                        ${_('Вы действительно хотите удалить статью')} <strong>"${article.getvalue("mainname", lang)}"</strong>?
-                                        ..
-		                    </div>
-		                    <div class="modal-footer">
-		                        <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отмена')}</button>
-		                        <a href="${request.route_url('remove', pub='article', id=article.id)}" type="button" class="btn btn-primary">${_('Удалить')}</a>
+                        % if article.user == authuser or user.admin == 1:
+	                    <a class="btn btn-default" href="${request.route_url('edit', pub='article', id=article.id)}">${_('Править')}</a>
+	                    <a class="btn btn-default" data-toggle="modal" data-target=".modal-remove">${_('Удалить')}</a>
+	                    <div class="modal fade modal-remove" tabindex="-1" role="dialog" aria-labelledby="modalRemoveLabel" aria-hidden="true">
+		                <div class="modal-dialog">
+		                    <div class="modal-content">
+		                        <div class="modal-header">
+		                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">${_('Закрыть')}</span></button>
+		                            <h4 class="modal-title" id="modalRemoveLabel">${_('Удаление статьи')}</h4>
+		                        </div>
+		                        <div class="modal-body">
+		                            ${_('Вы действительно хотите удалить статью')} <strong>"${article.getvalue("mainname", lang)}"</strong>?
+                                            ..
+		                        </div>
+		                        <div class="modal-footer">
+		                            <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отмена')}</button>
+		                            <a href="${request.route_url('remove', pub='article', id=article.id)}" type="button" class="btn btn-primary">${_('Удалить')}</a>
+		                        </div>
 		                    </div>
 		                </div>
-		            </div>
-	                </div>  
+	                    </div>  
+                        % endif
 	            % endif 
 	        </p>
                 % if article.getvalue("maintext", lang) is not None:
@@ -53,9 +54,9 @@
 	            <div class="row">
 	                <div class="panel panel-default">
 		            <div class="panel-heading">
-     		                <h4>${p.name}: <small>${p.date.strftime('%d/%m/%Y %H:%M')}</small><a name="${p.id}">
+     		                <h4>${p.name}: <small>${p.date.strftime('%d/%m/%Y %H:%M')}</small><a name="${p.id}"></a>
 		                    % if auth:
-		                        % if p.name == authuser:
+		                        % if p.name == authuser or user.admin == 1:
 		                            <a data-toggle="modal" data-target="#editModal${p.id}"><span class="glyphicon glyphicon-pencil"></span></a>
 		                            <div class="modal fade" id="editModal${p.id}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel${p.id}" aria-hidden="true">
   		                                <div class="modal-dialog">
@@ -77,7 +78,7 @@
 		                                    </div>
 		                                </div>
 		                            </div>
-		                        % endif
+
 		                        <a data-toggle="modal" data-target=".bs-delete-modal-sm${p.id}"><span class="glyphicon glyphicon-trash"></span></a>
 		                        <div class="modal fade bs-delete-modal-sm${p.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
 		                            <div class="modal-dialog">
@@ -95,6 +96,7 @@
 		                                </div>
 		                            </div>
 		                        </div>
+                                        % endif
 		                    % endif
 		                </h4>
 		            </div>

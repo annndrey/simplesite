@@ -9,15 +9,16 @@
         
         <title>${_('Лиетлахти, природно-этнографический парк')}</title>
 
-        <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/main.css')}" type="text/css" />
+ 
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/bootstrap.css')}" type="text/css" />
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/colorbox.css')}" type="text/css" />
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/select2.css')}" type="text/css" />
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/select2-bootstrap.css')}" type="text/css" />
-        <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/bootstrap-glyphicons.css')}" type="text/css" />
-        <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/font-awesome.css')}" type="text/css" />
+        ##<link rel="stylesheet" href="${req.static_url('lietlahti:static/css/bootstrap-glyphicons.css')}" type="text/css" />
+        ##<link rel="stylesheet" href="${req.static_url('lietlahti:static/css/font-awesome.css')}" type="text/css" />
         <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/social-likes_birman.css')}" type="text/css" />
-        
+        <link rel="stylesheet" href="${req.static_url('lietlahti:static/css/main.css')}" type="text/css" />
+       
         <link rel="icon" type="image/png" href="${req.static_url('lietlahti:static/favicon.png')}" />
         <script type="text/javascript" src="${req.static_url('lietlahti:static/js/jquery.js')}"></script>
         <script type="text/javascript" src="${req.static_url('lietlahti:static/js/jquery.actual.js')}"></script>
@@ -137,15 +138,6 @@
                                 </select>
                             </li>
 	                    </ul>
-	                    ##<form class="navbar-form " role="search">
-	                    ## <div class="input-group col-sm-3 col-md-3 col-lg-3">
-                            ##   <input type="text" size=14 class="form-control" placeholder="Искать" name="srch-term" id="srch-term">
-                            ##   <div class="input-group-btn">
-	                    ##	<button class="btn btn-default disabled" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            ##   </div>
-                            ## </div>
-	                    ##</form>
-
 	                </p>
                     </div>
                 </nav>
@@ -157,12 +149,25 @@
             
             <div id="footer">
                 <div class="container">
-                    <p class="muted credit">LIETLAHTI, 2015, <a href="https://github.com/annndrey"><img src="http://pomoyka.homelinux.net/immortal/10fbbd32-7ad5-4872-b928-5f15c900e2be.png" width=20px></a>
+                    <div id='flag' class='pull-right'><img src="http://pomoyka.homelinux.net/immortal/522ba11d-c22c-4e87-b296-8d229624a90a.jpg" width=50px></div>
+                    <p class="muted credit">Copyright &copy; Lietlahti Park, <script type="text/javascript">
+                                                                         var d = new Date()
+                                                                             document.write(d.getFullYear())
+                    </script> <a href="https://github.com/annndrey"><img src="${req.static_url('lietlahti:static/favicon.png')}" width=20px></a>
                     </p>
-                    
+
                 </div>
             </div>
         </div>
+        <script>
+         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+         
+         ga('create', 'UA-69339047-1', 'auto');
+         ga('send', 'pageview');
+         
+        </script>
     </body>
 </html>
-            

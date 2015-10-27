@@ -32,3 +32,24 @@ html, body {
     word-spacing: -.2em;
 }
 
+.jumbotron {
+    position: relative;
+    background: url("http://pomoyka.homelinux.net/immortal/32d86605-f273-4ef4-8a27-e85744c3d421.jpeg") center center;
+    background-size: cover;
+    overflow: hidden;
+    color: #E5ECF0;
+    width: 100%;
+    height: 60%;
+}
+
+.jumbotron h2{
+    color: #E5ECF0;
+}
+
+.jumbotron p{
+    color: #E5ECF0;
+}
+
+.jumbotron a{
+    color: #E5ECF0;
+}

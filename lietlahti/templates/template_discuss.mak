@@ -3,7 +3,6 @@
 
 <script src="${req.static_url('lietlahti:static/js/injectText.js')}" type='text/javascript'></script>
 
-
   <%def name="navbar(page, maxpage)">
     <ul class="pager">
       % if not page:
@@ -72,47 +71,47 @@
 	  <div class="panel panel-default">
 	    <div class="panel-heading">
      	      <h4>${p.name}: <small>${p.date.strftime('%d/%m/%Y %H:%M')}</small>
-		% if p.name == authuser:
+		% if p.name == authuser or user.admin == 1:
 		  <a data-toggle="modal" data-target="#editModal${p.id}"><span class="glyphicon glyphicon-pencil"></span></a>
-		% endif
+                  
 
-		<div class="modal fade" id="editModal${p.id}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel${p.id}" aria-hidden="true">
-  		  <div class="modal-dialog">
-    		    <div class="modal-content">
-      		      <div class="modal-header">
-        		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        		<h4 class="modal-title" id="editModalLabel${p.id}">${_('Правка записи')}</h4>
-      		      </div>
-      		      <div class="modal-body">
-        		<form role="form" method="post" action="${request.route_url('edit', pub='post', id=p.id)}">
-			  <textarea class="form-control" id="newpost" name="newpost" rows="4">${p.post|n}</textarea>
-			  <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
-      		      </div>
-      		      <div class="modal-footer">
-        		<button type="button" class="btn btn-default" data-dismiss="modal">${_('Закрыть')}</button>
-        		<button type="submit" class="btn btn-primary">${_('Сохранить')}</button>
-			</form>
+		  <div class="modal fade" id="editModal${p.id}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel${p.id}" aria-hidden="true">
+  		      <div class="modal-dialog">
+    		          <div class="modal-content">
+      		              <div class="modal-header">
+        		          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        		          <h4 class="modal-title" id="editModalLabel${p.id}">${_('Правка записи')}</h4>
+      		              </div>
+      		              <div class="modal-body">
+        		          <form role="form" method="post" action="${request.route_url('edit', pub='post', id=p.id)}">
+			              <textarea class="form-control" id="newpost" name="newpost" rows="4">${p.post|n}</textarea>
+			              <input type="hidden" id="csrf" name="csrf" value="${req.session.get_csrf_token()}" />
+      		              </div>
+      		              <div class="modal-footer">
+        		          <button type="button" class="btn btn-default" data-dismiss="modal">${_('Закрыть')}</button>
+        		          <button type="submit" class="btn btn-primary">${_('Сохранить')}</button>
+			          </form>
+		              </div>
+		          </div>
 		      </div>
-		    </div>
 		  </div>
-		</div>
-		% if p.name == authuser:
+		  
 		  <a data-toggle="modal" data-target=".bs-delete-modal-sm${p.id}"><span class="glyphicon glyphicon-trash"></span></a>
 		  <div class="modal fade bs-delete-modal-sm${p.id}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
-		    <div class="modal-dialog">
-		      <div class="modal-content">
-			<div class="modal-header">
-			  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-			  <h4 class="modal-title" id="deleteModalLabel${p.id}">${_('Удаление записи')}</h4>
-			</div>
-			<div class="modal-body">
-      			  <a href="${request.route_url('remove', pub='post', id=p.id)}">${_('Да, удалите немедленно')}!</a>
-			</div>
-			<div class="modal-footer">
-			  <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отменить')}</button>
-			</div>
+		      <div class="modal-dialog">
+		          <div class="modal-content">
+			      <div class="modal-header">
+			          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+			          <h4 class="modal-title" id="deleteModalLabel${p.id}">${_('Удаление записи')}</h4>
+			      </div>
+			      <div class="modal-body">
+      			          <a href="${request.route_url('remove', pub='post', id=p.id)}">${_('Да, удалите немедленно')}!</a>
+			      </div>
+			      <div class="modal-footer">
+			          <button type="button" class="btn btn-default" data-dismiss="modal">${_('Отменить')}</button>
+			      </div>
+		          </div>
 		      </div>
-		    </div>
 		  </div>
 		% endif
 		
