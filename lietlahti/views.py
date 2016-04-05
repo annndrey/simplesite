@@ -84,7 +84,7 @@ def main_view(request):
 	cfg = request.registry.settings
 	lang = request.session.get('lang', 'ru')
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
-	articles = DBSession.query(Article).order_by(Article.pubtimestamp.desc())
+	articles = DBSession.query(Article).order_by(Article.ordr.asc())
 	tpldef = {'articles':articles, 'statuses':article_status, 'pagename':request.translate(_('Главная')), 'contacts': contacts, 'lang':lang, "_":request.translate }
 	if authenticated_userid(request):
 		user = sess.query(User).filter(User.name == authenticated_userid(request)).first()
@@ -103,7 +103,7 @@ def article_view(request):
 	lang = request.session.get('lang', 'ru')
 	contacts = Contacts(cfg.get('lietlahti.contacts', None))
 	recaptcha_key = cfg.get('recaptcha.public', False)
-	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
+	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.ordr.asc())
 	article_url = request.matchdict.get('url', None)
 	article = DBSession.query(Article).filter(Article.url==article_url).first()
 	comments = DBSession.query(Post).filter(Post.page==article_url)
@@ -138,7 +138,7 @@ def add_article(request):
 		cfg = request.registry.settings
 		contacts = Contacts(cfg.get('lietlahti.contacts', None))
 		tpldef = {'alllang':alllang}
-		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
+		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.ordr.asc())
 		article_series = set([s.series for s in DBSession.query(Article).all()])
 		tpldef.update({
 				'authuser':authenticated_userid(request), 
@@ -296,7 +296,7 @@ def discuss_view(request):
 
 	else:
 		user = sess.query(User).filter(User.name == authenticated_userid(request)).first()
-		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
+		header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.ordr.asc())
 		max_page = DBSession.query(func.count(Post.id))[-1][-1]//on_page
 		if page and int(page) > 0:
 			page = int(page) - 1
@@ -359,7 +359,7 @@ def login_view(request):
 					request.response.headerlist.extend(headers)
 					return HTTPFound(request.route_url('main'), headers=headers)
 		did_fail = True
-	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
+	header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.ordr.asc())
 	tpldef = {
 		'login'       : login,
 		'articles'    : header,
@@ -444,7 +444,7 @@ def pub_edit(request):
 					return HTTPSeeOther(location=request.referrer)
 		else:
 			if pubtype == 'article':
-				header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.pubtimestamp.desc())
+				header = DBSession.query(Article).filter(Article.series=='mainpage').order_by(Article.ordr.asc())
 				article = DBSession.query(Article).filter(Article.id==pubid).first()
 				article_series = set([s.series for s in DBSession.query(Article).all()])
 				articleparams = {

@@ -21,7 +21,6 @@ from zope.sqlalchemy import ZopeTransactionExtension
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
-
 class Post(Base):
 	__tablename__ = 'book'
 	id = Column(Integer, primary_key=True)
