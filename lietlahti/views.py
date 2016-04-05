@@ -134,7 +134,7 @@ def add_article(request):
 		return HTTPSeeOther(location=request.route_url('login'))
 	
 	if not request.POST:
-		user = DBsession.query(User).filter(User.name == authenticated_userid(request)).first()
+		user = DBSession.query(User).filter(User.name == authenticated_userid(request)).first()
 		cfg = request.registry.settings
 		contacts = Contacts(cfg.get('lietlahti.contacts', None))
 		tpldef = {'alllang':alllang}

@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="keywords" content="lietlahti discuss page" />
         <meta name="description" content="lietlahti" />
-        
+        <meta name="google-site-verification" content="KCm6wt6-vBwRhC5OXitcWJoZpm-nS6OAp7GqC_tPBl0" />
         <title>${_('Лиетлахти, природно-этнографический парк')}</title>
 
  

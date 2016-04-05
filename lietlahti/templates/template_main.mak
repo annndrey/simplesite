@@ -2,8 +2,9 @@
 
 <%inherit file="lietlahti:templates/template_base.mak"/>
 <div class="jumbotron">
-    <h2>${_('Природно-этнографический парк «Лиетлахти»')}</h2>
-    <p>${_('Эко-туризм, приключенческий туризм, семейный отдых, размещение в кемпинге или фермерском доме.')}</p>
+    <h2 class="text-center">${_('Природно-этнографический парк «Лиетлахти»')}</h2>
+    <p>${_('Экотуризм, скалолазание, приключенческий туризм, семейный отдых, размещение в кемпинге или фермерском доме.')}</p>
+    <div class="col-xs-12" style="height:20px;"></div>
     <p><span class="glyphicon glyphicon-hand-right"></span> <a href="/article/contacts" role="button">${_('Как к нам попасть?')}</a></p>
     <p><span class="glyphicon glyphicon-hand-right"></span> <a href="/article/prices" role="button">${_('Размещение и аренда')}</a></p>
 </div>
