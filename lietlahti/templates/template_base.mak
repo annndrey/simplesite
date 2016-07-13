@@ -73,9 +73,9 @@
                 <div class="btn-group btn-group-justified" role="group">
                     <a class="btn btn-default btn-sm" role="button" href="tel:${contacts.get('phone')}"><img width=15px src="${req.static_url('lietlahti:static/icons/phone.png')}"></span> <span class="hidden-xs hidden-sm">${contacts.get('phone')}</span></a>
                     <a class="btn btn-default btn-sm" href="mailto:${contacts.get('email')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/mail.png')}"> <span class="hidden-xs hidden-sm">${contacts.get('email')}</span></a> 
-                    <a class="btn btn-default btn-sm" href="${contacts.get('vk')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/vk.png')}"> <span class="hidden-xs hidden-sm">${contacts.get('vk').replace('https://', '')}</span></a>
-                    <a class="btn btn-default btn-sm" href="${contacts.get('fb')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/fb.png')}"> <span class="hidden-xs hidden-sm">${contacts.get('fb').replace('https://', '')}</span></a>
-                    <a class="btn btn-default btn-sm" href="${contacts.get('instagramm')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/instagramm.png')}"> <span class="hidden-xs hidden-sm">${contacts.get('instagramm').replace('http://', '')}</span></a>
+                    <a class="btn btn-default btn-sm" href="${contacts.get('vk')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/vk.png')}"> <span class="hidden-xs hidden-sm">VKontakte</span></a>
+                    <a class="btn btn-default btn-sm" href="${contacts.get('fb')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/fb.png')}"> <span class="hidden-xs hidden-sm">Facebook</span></a>
+                    <a class="btn btn-default btn-sm" href="${contacts.get('instagramm')}" role="button"><img width=15px src="${req.static_url('lietlahti:static/icons/instagramm.png')}"> <span class="hidden-xs hidden-sm">Instagramm</span></a>
                 </div>
                 <nav  class="navbar navbar-default" role="navigation">
                     % if pagename:
@@ -150,7 +150,7 @@
             
             <div id="footer">
                 <div class="container">
-                    <div id='flag' class='pull-right'><img src="http://pomoyka.homelinux.net/immortal/522ba11d-c22c-4e87-b296-8d229624a90a.jpg" width=50px></div>
+                    <div id='flag' class='pull-right'><img src="http://pomoyka.homelinux.net/immortal/522ba11d-c22c-4e87-b296-8d229624a90a.jpg" width=200px></div>
                     <p class="muted credit">Copyright &copy; Lietlahti Park, <script type="text/javascript">
                                                                          var d = new Date()
                                                                              document.write(d.getFullYear())

@@ -7,6 +7,9 @@ html, body {
 /* The html and body elements cannot have any padding or margin. */
 }
 
+#flag {margin-top: -90px;
+}
+
 body {font-family: 'Roboto Condensed', sans-serif;}
 
 /* Wrapper for page content to push down footer */
@@ -37,6 +40,7 @@ body {font-family: 'Roboto Condensed', sans-serif;}
 .login {
     word-spacing: -.2em;
 }
+
 
 .jumbotron {
     position: relative;
